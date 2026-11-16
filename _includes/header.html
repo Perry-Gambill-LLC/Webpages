@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Perry &amp; Gambill LLC, home">
+      <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="1" y="1" width="62" height="62" rx="6" fill="none" stroke="#d5b37b" stroke-width="2"/>
+        <text x="32" y="44" text-anchor="middle" font-family="Source Serif 4, Georgia, serif" font-size="34" font-style="italic" fill="#d5b37b">&amp;</text>
+      </svg>
+      <span class="brand__name">Perry <em>&amp;</em> Gambill<span class="brand__llc">LLC</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a href="{{ '/' | relative_url }}#focus">Focus Areas</a></li>
+        <li><a href="{{ '/' | relative_url }}#mission">Mission</a></li>
+        <li><a href="{{ '/apps/' | relative_url }}"{% if page.nav == 'apps' %} aria-current="page"{% endif %}>Apps</a></li>
+        <li><a href="{{ '/legal' | relative_url }}"{% if page.nav == 'legal' %} aria-current="page"{% endif %}>Legal</a></li>
+      </ul>
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>

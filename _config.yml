@@ -1,0 +1,36 @@
+# Site settings ---------------------------------------------------------------
+title: Perry & Gambill LLC
+tagline: Real Estate, Venture Capital & Software
+description: Capital, expertise, and technology, put to work for the communities we serve.
+email: support.perrygambill@icloud.com   # default contact/support email across the site
+domain: https://www.perrygambill.com      # used for canonical links and social previews
+
+# Build settings --------------------------------------------------------------
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+
+# Each file in _apps/ becomes a support + privacy page at /apps/<file-name>/
+collections:
+  apps:
+    output: true
+    permalink: /apps/:name/
+
+defaults:
+  - scope:
+      type: apps
+    values:
+      layout: app
+      nav: apps
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - _templates

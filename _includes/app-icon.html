@@ -1,0 +1,10 @@
+{%- comment -%}
+  Renders an app's icon, or a branded placeholder tile if no icon is set yet.
+  Usage: {% include app-icon.html app=page size="lg" %}
+{%- endcomment -%}
+{%- assign app = include.app -%}
+{%- if app.icon and app.icon != "" -%}
+<img class="app-icon app-icon--{{ include.size | default: 'md' }}" src="{{ app.icon | relative_url }}" alt="{{ app.name }} app icon" width="128" height="128">
+{%- else -%}
+<div class="app-icon app-icon--{{ include.size | default: 'md' }} app-icon--placeholder" role="img" aria-label="{{ app.name }} app icon placeholder"><span>{{ app.name | slice: 0 }}</span></div>
+{%- endif -%}

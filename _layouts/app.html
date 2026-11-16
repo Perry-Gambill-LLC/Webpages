@@ -1,0 +1,93 @@
+---
+layout: default
+---
+{%- comment -%}
+  Support + Privacy Policy page for a single app.
+  Data comes from the app's front matter in _apps/<name>.md; the Markdown body is the privacy policy.
+{%- endcomment -%}
+{%- assign support_email = page.support_email | default: site.email -%}
+{%- assign toc_parts = content | split: '<h2 id="' -%}
+
+<section class="page-hero app-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ '/apps/' | relative_url }}">Apps</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ page.name }}</span>
+    </nav>
+
+    <div class="app-hero__inner">
+      {% include app-icon.html app=page size="lg" %}
+      <div>
+        <span class="eyebrow">Support &amp; Privacy Policy</span>
+        <h1>{{ page.name }}</h1>
+        {%- if page.tagline %}
+        <p class="app-hero__tagline">{{ page.tagline }}</p>
+        {%- endif %}
+        {%- if page.platforms %}
+        <ul class="app-hero__platforms">
+          {%- for platform in page.platforms %}
+          <li>{{ platform }}</li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </div>
+    </div>
+
+    <div class="hero__actions">
+      {%- if page.app_store_url %}
+      <a class="btn btn--primary" href="{{ page.app_store_url }}" rel="noopener">
+        Download on the App Store
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      {%- endif %}
+      <a class="btn {% if page.app_store_url %}btn--ghost{% else %}btn--primary{% endif %}" href="#support">Get support</a>
+      <a class="btn btn--ghost" href="#privacy">Read the privacy policy</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap app-support" id="support" aria-labelledby="support-title">
+  <div class="app-support__card app-support__card--main">
+    <span class="eyebrow">Support</span>
+    <h2 id="support-title">Need help with {{ page.name }}?</h2>
+    <p>For support with the {{ page.name }} app, please contact us at <a href="mailto:{{ support_email }}?subject={{ page.name | append: ' Support' | uri_escape }}">{{ support_email }}</a>.</p>
+    <a class="btn btn--dark" href="mailto:{{ support_email }}?subject={{ page.name | append: ' Support' | uri_escape }}">
+      Email support
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+  </div>
+  <div class="app-support__card">
+    <h3>Helpful links</h3>
+    <ul class="link-list">
+      <li><a href="#privacy">{{ page.name }} Privacy Policy</a></li>
+      <li><a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a></li>
+      <li><a href="{{ '/apps/' | relative_url }}">All apps by Perry &amp; Gambill</a></li>
+    </ul>
+  </div>
+</section>
+
+<div class="wrap legal app-privacy{% if toc_parts.size <= 1 %} legal--single{% endif %}" id="privacy">
+  {%- if toc_parts.size > 1 %}
+  <aside class="toc" aria-labelledby="toc-title">
+    <h2 id="toc-title">Contents</h2>
+    <ol>
+      {%- for part in toc_parts offset:1 %}
+      {%- assign heading_id = part | split: '"' | first %}
+      {%- assign heading_text = part | split: '</h2>' | first | split: '">' | last | strip_html %}
+      <li><a href="#{{ heading_id }}">{{ heading_text }}</a></li>
+      {%- endfor %}
+    </ol>
+  </aside>
+  {%- endif %}
+
+  <article class="legal__body">
+    <header class="legal__head">
+      <h2 class="legal__title">Privacy Policy</h2>
+      <p class="legal__meta">{{ page.name }}{% if page.privacy_effective_date %} &middot; Effective date: <strong>{{ page.privacy_effective_date }}</strong>{% endif %}</p>
+    </header>
+    <div class="prose">
+{{ content }}
+    </div>
+  </article>
+</div>

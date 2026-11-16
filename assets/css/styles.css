@@ -703,6 +703,204 @@ p { margin: 0; }
   .toc ol { grid-template-columns: 1fr; }
 }
 
+/* Card link (home "Apps & Software" card) ---------------------------------- */
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.card__link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+.card__link:hover svg { transform: translateX(3px); }
+
+/* App icon ----------------------------------------------------------------- */
+.app-icon {
+  flex: none;
+  object-fit: cover;
+  border-radius: 22.5%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 16px 32px -16px rgba(0, 0, 0, 0.55);
+}
+.app-icon--lg { width: 128px; height: 128px; }
+.app-icon--md { width: 76px; height: 76px; }
+
+.app-icon--placeholder {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(120% 120% at 20% 0%, rgba(213, 179, 123, 0.22), transparent 60%),
+    linear-gradient(150deg, var(--ink-3), var(--ink));
+  border: 1px solid rgba(213, 179, 123, 0.4);
+  color: var(--accent-light);
+  font-family: var(--font-serif);
+  font-style: italic;
+  line-height: 1;
+}
+.app-icon--lg.app-icon--placeholder { font-size: 60px; }
+.app-icon--md.app-icon--placeholder { font-size: 36px; }
+
+/* App page hero ------------------------------------------------------------ */
+.crumbs {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted-dark);
+}
+.crumbs a { color: var(--muted-dark); text-decoration: none; }
+.crumbs a:hover { color: #fff; }
+.crumbs [aria-current] { color: #fff; }
+
+.app-hero__inner {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  margin-top: 36px;
+}
+.app-hero h1 { margin-top: 14px; }
+.app-hero__tagline {
+  margin-top: 12px;
+  max-width: 52ch;
+  color: var(--muted-dark);
+  font-size: 18px;
+}
+.app-hero__platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.app-hero__platforms li {
+  padding: 4px 12px;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 640px) {
+  .app-hero__inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .app-icon--lg { width: 96px; height: 96px; }
+  .app-icon--lg.app-icon--placeholder { font-size: 46px; }
+}
+
+/* App support cards -------------------------------------------------------- */
+.app-support {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  padding-top: clamp(48px, 7vw, 88px);
+}
+.app-support__card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(28px, 4vw, 40px);
+}
+.app-support__card h2 {
+  margin: 14px 0 12px;
+  font-size: clamp(26px, 3vw, 34px);
+}
+.app-support__card h3 { font-size: 22px; margin-bottom: 16px; }
+.app-support__card p { color: var(--muted); }
+.app-support__card p a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.app-support__card .btn { margin-top: 28px; }
+
+.link-list { list-style: none; margin: 0; padding: 0; }
+.link-list li + li { border-top: 1px solid var(--line); }
+.link-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+.link-list a::after { content: "\2192"; color: var(--accent); transition: transform 0.2s; }
+.link-list a:hover { color: var(--accent); }
+.link-list a:hover::after { transform: translateX(3px); }
+
+@media (max-width: 820px) {
+  .app-support { grid-template-columns: 1fr; }
+}
+
+.app-privacy { padding-top: clamp(40px, 6vw, 72px); }
+.legal--single { grid-template-columns: 1fr; }
+
+/* Legal body: header + Markdown prose -------------------------------------- */
+.legal__head {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.legal__body .legal__title { font-size: clamp(30px, 3.6vw, 40px); margin: 0; display: block; }
+.legal__meta { margin-top: 10px; color: var(--muted); font-size: 15.5px; }
+.legal__meta strong { color: var(--ink); font-weight: 600; }
+
+.prose > * + * { margin-top: 14px; }
+.prose h2 { margin-top: 40px !important; }
+.prose ul {
+  padding-left: 1.2em;
+  display: grid;
+  gap: 10px;
+}
+.prose ul li::marker { color: var(--accent); }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* Apps index --------------------------------------------------------------- */
+.section--tight { padding-top: clamp(48px, 7vw, 88px); }
+
+.app-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 24px;
+}
+.app-tile {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.app-tile:hover {
+  border-color: #cfc6b4;
+  box-shadow: 0 18px 40px -24px rgba(19, 32, 42, 0.35);
+  transform: translateY(-3px);
+}
+.app-tile h2 { font-size: 26px; }
+.app-tile p { margin-top: 8px; color: var(--muted); font-size: 15.5px; }
+.app-tile__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.app-tile__link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+.app-tile:hover .app-tile__link svg { transform: translateX(3px); }
+
+.empty-note { color: var(--muted); }
+.apps-contact {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.apps-contact a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+
+/* 404 ---------------------------------------------------------------------- */
+.page-hero--center { min-height: 60vh; display: grid; align-items: center; }
+
 /* Reveal on scroll ---------------------------------------------------------- */
 .js .reveal {
   opacity: 0;

@@ -1,0 +1,44 @@
+---
+layout: default
+title: Our Apps
+description: Apps and software by Perry & Gambill LLC, with support and privacy information for each.
+nav: apps
+---
+{%- assign apps = site.apps | sort: "name" -%}
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Apps &amp; Software</span>
+    <h1>Our Apps</h1>
+    <div class="page-hero__meta">
+      <span>Consumer-grade and business-oriented digital solutions across various platforms.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {%- if apps.size > 0 %}
+    <div class="app-tiles">
+      {%- for app in apps %}
+      <a class="app-tile reveal" href="{{ app.url | relative_url }}">
+        {% include app-icon.html app=app size="md" %}
+        <div class="app-tile__body">
+          <h2>{{ app.name }}</h2>
+          {%- if app.tagline %}
+          <p>{{ app.tagline }}</p>
+          {%- endif %}
+          <span class="app-tile__link">
+            Support &amp; Privacy
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-note">Our apps will be listed here soon.</p>
+    {%- endif %}
+
+    <p class="apps-contact">Questions about one of our apps? Email <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+  </div>
+</section>

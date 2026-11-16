@@ -1,0 +1,39 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Perry &amp; Gambill LLC, home">
+          <span class="brand__name">Perry <em>&amp;</em> Gambill<span class="brand__llc">LLC</span></span>
+        </a>
+        <p class="footer__tagline">Strengthening communities through capital, expertise, and innovative technology.</p>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="{{ '/' | relative_url }}#focus">Focus Areas</a></li>
+            <li><a href="{{ '/' | relative_url }}#mission">Mission</a></li>
+            <li><a href="{{ '/apps/' | relative_url }}">Apps</a></li>
+            <li><a href="{{ '/' | relative_url }}#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; <span data-year>{{ site.time | date: '%Y' }}</span> Perry &amp; Gambill LLC. All rights reserved.</span>
+      <a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>
