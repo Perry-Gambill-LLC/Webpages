@@ -43,4 +43,4 @@ python3 -m http.server 8000
 
 - Text lives directly in `index.html` and `legal.html`.
 - Brand colors and fonts are defined as CSS variables at the top of `assets/css/styles.css`.
-- The contact email appears in both HTML files (search for `contact@perrygambill.com`).
+- The contact email appears in both HTML files (search for `support.perrygambill@icloud.com`).
