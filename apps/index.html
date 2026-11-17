@@ -4,7 +4,10 @@ title: Our Apps
 description: Apps and software by Perry & Gambill LLC, with support and privacy information for each.
 nav: apps
 ---
-{%- assign apps = site.apps | sort: "name" -%}
+{%- comment -%} Apps with an `order` value come first (lowest first); the rest follow alphabetically. {%- endcomment -%}
+{%- assign ordered_apps = site.apps | where_exp: "app", "app.order" | sort: "order" -%}
+{%- assign unordered_apps = site.apps | where_exp: "app", "app.order == nil" | sort: "name" -%}
+{%- assign apps = ordered_apps | concat: unordered_apps -%}
 <section class="page-hero">
   <div class="wrap">
     <span class="eyebrow">Apps &amp; Software</span>

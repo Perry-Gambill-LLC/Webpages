@@ -13,6 +13,10 @@ name: App Name
 tagline: One sentence describing what the app does.
 description: Support and Privacy Policy for the App Name app by Perry & Gambill LLC.
 
+# Position on the Apps page (lower numbers first). Leave blank to list after
+# the numbered apps, alphabetically.
+order:
+
 # App icon: square PNG, 1024x1024 recommended, saved in assets/img/apps/
 #   icon: /assets/img/apps/app-name.png
 # Leave blank to show the placeholder tile.

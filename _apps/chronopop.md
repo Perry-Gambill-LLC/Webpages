@@ -3,6 +3,9 @@ name: Chronopop
 tagline: Keep up with the people who matter, with check-in reminders and birthdays.
 description: Support and Privacy Policy for the Chronopop app by Perry & Gambill LLC.
 
+# Position on the Apps page (lower numbers first)
+order: 1
+
 # App icon: square PNG in assets/img/apps/ (leave blank to show the placeholder tile)
 icon: /assets/img/apps/chronopop.png
 

@@ -24,7 +24,8 @@ assets/img/apps/         App icons
 
 1. Copy `_templates/app.md` to `_apps/<app-name>.md`, e.g. `_apps/my-app.md`.
    The file name becomes the URL: `/apps/my-app/`.
-2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `app_store_url`, `platforms` and `support_email`.
+2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `order`, `app_store_url`, `platforms` and `support_email`.
+   `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
 3. Replace the privacy policy text below the front matter. It's plain Markdown; each `## Heading` is added to the page's table of contents automatically.
 4. Commit and push. The app appears on `/apps/` and is linked from the home page.
 
