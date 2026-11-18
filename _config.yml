@@ -4,6 +4,7 @@ tagline: Real Estate, Venture Capital & Software
 description: Capital, expertise, and technology, put to work for the communities we serve.
 email: support.perrygambill@icloud.com   # default contact/support email across the site
 domain: https://www.perrygambill.com      # used for canonical links and social previews
+app_terms_url: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/   # default Terms of Service for app pages (Apple's standard EULA); override per app with terms_url
 
 # Build settings --------------------------------------------------------------
 markdown: kramdown
