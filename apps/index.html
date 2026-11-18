@@ -23,19 +23,27 @@ nav: apps
     {%- if apps.size > 0 %}
     <div class="app-tiles">
       {%- for app in apps %}
-      <a class="app-tile reveal" href="{{ app.url | relative_url }}">
+      <article class="app-tile reveal">
         {% include app-icon.html app=app size="md" %}
         <div class="app-tile__body">
-          <h2>{{ app.name }}</h2>
+          <h2><a class="app-tile__main" href="{{ app.url | relative_url }}">{{ app.name }}</a></h2>
           {%- if app.tagline %}
           <p>{{ app.tagline }}</p>
           {%- endif %}
-          <span class="app-tile__link">
-            Support &amp; Privacy
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </span>
+          <div class="app-tile__links">
+            <span class="app-tile__link">
+              Support &amp; Privacy
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+            {%- if app.app_store_url %}
+            <a class="app-tile__link app-tile__store" href="{{ app.app_store_url }}" rel="noopener">
+              App Store
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            {%- endif %}
+          </div>
         </div>
-      </a>
+      </article>
       {%- endfor %}
     </div>
     {%- else %}
