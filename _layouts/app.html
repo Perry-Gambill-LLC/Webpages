@@ -6,6 +6,7 @@ layout: default
   Data comes from the app's front matter in _apps/<name>.md; the Markdown body is the privacy policy.
 {%- endcomment -%}
 {%- assign support_email = page.support_email | default: site.email -%}
+{%- assign terms_url = page.terms_url | default: site.app_terms_url -%}
 {%- assign toc_parts = content | split: '<h2 id="' -%}
 
 <section class="page-hero app-hero">
@@ -61,7 +62,7 @@ layout: default
     <h3>Helpful links</h3>
     <ul class="link-list">
       <li><a href="#privacy">{{ page.name }} Privacy Policy</a></li>
-      <li><a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a></li>
+      <li><a href="{{ terms_url }}" rel="noopener">{{ page.name }} Terms of Service</a></li>
       <li><a href="{{ '/apps/' | relative_url }}">All apps by Perry &amp; Gambill</a></li>
     </ul>
   </div>
