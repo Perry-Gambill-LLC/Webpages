@@ -10,7 +10,7 @@ order: 1
 icon: /assets/img/apps/chronopop.png
 
 # Optional extras (shown only when filled in)
-app_store_url:          # e.g. https://apps.apple.com/app/id0000000000
+app_store_url: https://apps.apple.com/us/app/chronopop/id6834551609
 platforms:              # e.g. [iPhone, iPad]
 support_email:          # leave blank to use the site-wide email from _config.yml
 
