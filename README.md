@@ -74,4 +74,4 @@ bundle exec jekyll serve --livereload
      `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 3. Once DNS propagates and GitHub verifies the domain, check **Enforce HTTPS**.
 
-Old Google Sites links keep working after the switch: `/home` redirects to the home page, and `/home/chronopop` redirects to `/apps/chronopop/`.
+Old Google Sites links keep working after the switch: `/home` redirects to the home page, and `/home/chronopop` redirects to `/apps/amigology/`. The app was renamed from Chronopop to Amigology, so `/apps/chronopop/` also redirects to `/apps/amigology/`.
