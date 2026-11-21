@@ -13,13 +13,15 @@ Whenever you change an English app page, or add a new one, update both translati
 3. Translate `tagline`, `description` and `privacy_effective_date` (written as a local date: `14 de noviembre de 2026`, `14 de novembro de 2026`). Don't copy other front matter; translations take the icon, App Store link, support email etc. from the English page.
 4. Run `ruby scripts/translations.rb stamp _apps/es-mx/<app>.md _apps/pt-br/<app>.md`, then `ruby scripts/translations.rb` must pass.
 
-When you add or change interface text in `_layouts/app.html`, `_includes/header.html`, `_includes/footer.html` or `_includes/app-icon.html`, put the string in `_data/i18n.yml` for every language rather than hard-coding English.
+The same goes for an app's Terms of Use on Android (`_terms/android/<app>.md`, translated in `_terms/android/es-mx/` and `_terms/android/pt-br/`): its translated front matter is `description` and `effective_date`, and you stamp the files under `_terms/android/<lang>/`. Apple's standard EULA covers the iPhone apps; Android terms are our own, so keep them consistent with what the Android app actually does.
+
+When you add or change interface text in `_layouts/app.html`, `_layouts/terms.html`, `_includes/header.html`, `_includes/footer.html`, `_includes/lang-switch.html` or `_includes/app-icon.html`, put the string in `_data/i18n.yml` for every language rather than hard-coding English.
 
 Translation style:
 - es-MX: Mexican Spanish, informal "tú", Mexican vocabulary (celular, computadora, correo electrónico, "la app").
 - pt-BR: Brazilian Portuguese, "você", "o app".
 - Use Apple's own localized names for iOS screens and settings (es-MX: Configuración, Archivos, Cuenta de Apple; pt-BR: Ajustes, Arquivos, Conta Apple).
 - Leave brand and product names untranslated (Amigology, Amigology Plus, Meowza, Mr. Whiskers, iCloud Drive, App Store).
-- Translate faithfully; don't add, drop or soften anything in a privacy policy.
+- Translate faithfully; don't add, drop or soften anything in a privacy policy or terms of use.
 
 Use Homebrew Ruby: `export PATH="/opt/homebrew/opt/ruby/bin:$PATH"`.

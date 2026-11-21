@@ -41,6 +41,9 @@ en-US:
   helpful_links: Helpful links
   privacy_link: "%app% Privacy Policy"
   terms_link: "%app% Terms of Service"
+  terms_link_ios: "%app% Terms of Use for iPhone"
+  terms_link_android: "%app% Terms of Use for Android"
+  terms_heading_android: Terms of Use for Android
   all_apps: All apps by Perry & Gambill
   contents: Contents
   privacy_policy: Privacy Policy
@@ -84,6 +87,9 @@ es-MX:
   helpful_links: Enlaces útiles
   privacy_link: Política de privacidad de %app%
   terms_link: Términos del servicio de %app%
+  terms_link_ios: Condiciones de uso de %app% para iPhone
+  terms_link_android: Condiciones de uso de %app% para Android
+  terms_heading_android: Condiciones de uso para Android
   all_apps: Todas las apps de Perry & Gambill
   contents: Contenido
   privacy_policy: Política de privacidad
@@ -127,6 +133,9 @@ pt-BR:
   helpful_links: Links úteis
   privacy_link: Política de Privacidade do %app%
   terms_link: Termos de Serviço do %app%
+  terms_link_ios: Termos de Uso do %app% para iPhone
+  terms_link_android: Termos de Uso do %app% para Android
+  terms_heading_android: Termos de Uso para Android
   all_apps: Todos os apps da Perry & Gambill
   contents: Conteúdo
   privacy_policy: Política de Privacidade
