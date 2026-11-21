@@ -16,8 +16,9 @@ support_email:          # leave blank to use the site-wide email from _config.ym
 
 privacy_effective_date: November 14, 2026
 
-# Keep old links working (Google Sites and the pre-rename Chronopop URL)
+# Keep old links working: the app's short URL, Google Sites, and the pre-rename Chronopop URL
 redirect_from:
+  - /apps/amigology/
   - /home/chronopop/
   - /apps/chronopop/
 ---

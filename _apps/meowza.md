@@ -15,6 +15,10 @@ platforms:              # e.g. [iPhone, iPad]
 support_email:          # leave blank to use the site-wide email from _config.yml
 
 privacy_effective_date: August 3, 2026
+
+# Keep the app's short URL working (the page itself is at /apps/meowza/en-us/)
+redirect_from:
+  - /apps/meowza/
 ---
 {%- assign email = page.support_email | default: site.email -%}
 

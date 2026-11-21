@@ -14,7 +14,8 @@
 #
 # Only run `stamp` after the translation really has been updated.
 #
-# The check also makes sure that every English app page has a translation in
+# The check also makes sure that every English app page redirects its short URL
+# (/apps/<app>/) to the English page, has a translation in
 # each language listed under `translations` in _config.yml, that translations
 # keep the English page's sections (same headings, same IDs, same order), and
 # that _data/i18n.yml has every interface string in every language.
@@ -97,6 +98,10 @@ def check
 
   english.each do |source|
     source_text = File.read(source)
+    short_url = "/apps/#{File.basename(source, '.md')}/"
+    unless Array(parse(source_text)[0]["redirect_from"]).include?(short_url)
+      problems << "#{rel(source)}: add #{short_url} under redirect_from, so the short URL redirects to the English page."
+    end
     current = fingerprint(source_text)
     source_headings = headings(parse(source_text)[1])
 
@@ -137,7 +142,7 @@ def check
   end
 
   strings = YAML.safe_load_file(File.join(ROOT, "_data", "i18n.yml"))
-  english_keys = strings.fetch(config.fetch("lang", "en")).keys
+  english_keys = strings.fetch(config.fetch("lang")).keys
   languages.each do |lang|
     keys = (strings[lang] || {}).keys
     missing = english_keys - keys

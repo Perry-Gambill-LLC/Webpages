@@ -9,7 +9,7 @@ _config.yml              Site settings (title, default email, plugins)
 _layouts/default.html    Page shell: head, header, footer
 _layouts/app.html        Template for every app's Support & Privacy page
 _includes/               Shared pieces (head, header, footer, app icon)
-_apps/                   One Markdown file per app  ->  /apps/<file-name>/
+_apps/                   One Markdown file per app (English)  ->  /apps/<file-name>/en-us/
 _apps/es-mx/, _apps/pt-br/  Translations of each app page  ->  /apps/<file-name>/es-mx/ etc.
 _data/i18n.yml           Interface text for app pages, header and footer, per language
 scripts/translations.rb  Checks that translations are complete and up to date
@@ -26,7 +26,7 @@ assets/img/apps/         App icons
 ## Adding a new app
 
 1. Copy `_templates/app.md` to `_apps/<app-name>.md`, e.g. `_apps/my-app.md`.
-   The file name becomes the URL: `/apps/my-app/`.
+   The file name becomes the URL: `/apps/my-app/en-us/`. Set `redirect_from` to `/apps/my-app/` (as in the template) so the short URL `/apps/my-app/` redirects there.
 2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `order`, `app_store_url`, `platforms`, `support_email` and `terms_url`.
    `terms_url` sets the app's Terms of Service link; leave it blank to use Apple's standard EULA (`app_terms_url` in `_config.yml`).
    `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
@@ -34,7 +34,7 @@ assets/img/apps/         App icons
 4. Add the Mexican Spanish and Brazilian Portuguese translations (see [Translations](#translations)).
 5. Commit and push. The app appears on `/apps/` and is linked from the home page.
 
-Use the page URL for both the **Support URL** and the **Privacy Policy URL** in App Store Connect. To point straight at each section, use `/apps/my-app/#support` and `/apps/my-app/#privacy`.
+Use the page URL, e.g. `/apps/my-app/en-us/`, for both the **Support URL** and the **Privacy Policy URL** in App Store Connect. To point straight at each section, add `#support` or `#privacy`. The short URL `/apps/my-app/` also works and keeps the `#support`/`#privacy` part when it redirects, so App Store links set up before the `/en-us/` change still work.
 
 ### App icons
 
@@ -48,7 +48,7 @@ Until an icon is set, the page shows a placeholder tile with the app's first let
 
 ## Translations
 
-Each app page is also published in Mexican Spanish and Brazilian Portuguese, at `/apps/<app>/es-mx/` and `/apps/<app>/pt-br/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
+Each app page is published in US English, Mexican Spanish and Brazilian Portuguese, at `/apps/<app>/en-us/`, `/apps/<app>/es-mx/` and `/apps/<app>/pt-br/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
 
 - A translation lives at `_apps/es-mx/<app>.md` or `_apps/pt-br/<app>.md`, with the same file name as the English page.
 - Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date`, plus `source_hash`. Everything else (name, icon, App Store link, support email, terms link) comes from the English page.
@@ -69,7 +69,7 @@ ruby scripts/translations.rb stamp _apps/es-mx/<app>.md _apps/pt-br/<app>.md
 
 The same check runs on GitHub (Actions → Translations) on every push to `main`. A failed check doesn't stop the site from publishing; it just flags that the translations are behind.
 
-In App Store Connect, set each localization's Privacy Policy URL and Support URL to its translated page: Spanish (Mexico) → `/apps/<app>/es-mx/`, Portuguese (Brazil) → `/apps/<app>/pt-br/`.
+In App Store Connect, set each localization's Privacy Policy URL and Support URL to its page: English (U.S.) → `/apps/<app>/en-us/`, Spanish (Mexico) → `/apps/<app>/es-mx/`, Portuguese (Brazil) → `/apps/<app>/pt-br/`.
 
 ## Changing the contact email
 
@@ -103,4 +103,4 @@ bundle exec jekyll serve --livereload
      `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 3. Once DNS propagates and GitHub verifies the domain, check **Enforce HTTPS**.
 
-Old Google Sites links keep working after the switch: `/home` redirects to the home page, and `/home/chronopop` redirects to `/apps/amigology/`. The app was renamed from Chronopop to Amigology, so `/apps/chronopop/` also redirects to `/apps/amigology/`.
+Old Google Sites links keep working after the switch: `/home` redirects to the home page, and `/home/chronopop` redirects to `/apps/amigology/en-us/`. The app was renamed from Chronopop to Amigology, so `/apps/chronopop/` also redirects there.

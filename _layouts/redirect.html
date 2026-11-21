@@ -1,0 +1,15 @@
+{%- comment -%}
+  Page for every redirect_from URL (jekyll-redirect-from uses this instead of its own).
+  Unlike the default, it keeps the #fragment, so /apps/<app>/#privacy lands on the privacy policy.
+{%- endcomment -%}
+<!DOCTYPE html>
+<html lang="en-US">
+  <meta charset="utf-8">
+  <title>Redirecting&hellip;</title>
+  <link rel="canonical" href="{{ page.redirect.to | escape }}">
+  <script>location.replace({{ page.redirect.to | jsonify }} + location.hash)</script>
+  <meta http-equiv="refresh" content="0; url={{ page.redirect.to | escape }}">
+  <meta name="robots" content="noindex">
+  <h1>Redirecting&hellip;</h1>
+  <a href="{{ page.redirect.to | escape }}">Click here if you are not redirected.</a>
+</html>

@@ -31,9 +31,10 @@ terms_url:              # leave blank to use Apple's standard EULA (app_terms_ur
 
 privacy_effective_date: "[Month Day, Year]"
 
-# Optional: keep an old link working
-# redirect_from:
-#   - /old/path/
+# The page is published at /apps/<app-name>/en-us/. Keep this redirect so the
+# short URL /apps/<app-name>/ works too (replace app-name with the file name).
+redirect_from:
+  - /apps/app-name/
 ---
 {%- assign email = page.support_email | default: site.email -%}
 

@@ -7,10 +7,11 @@ domain: https://www.perrygambill.com      # used for canonical links and social 
 app_terms_url: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/   # default Terms of Service for app pages (Apple's standard EULA); override per app with terms_url
 
 # Languages -------------------------------------------------------------------
-# The site is written in English. Each app page is also published in these
-# languages, from _apps/<lowercase code>/<app>.md at /apps/<app>/<lowercase code>/.
-# Interface text for every language lives in _data/i18n.yml.
-lang: en
+# The site is written in US English. App pages are published per language at
+# /apps/<app>/<lowercase code>/: English from _apps/<app>.md at /apps/<app>/en-us/,
+# and each translation from _apps/<lowercase code>/<app>.md. /apps/<app>/ redirects
+# to the English page. Interface text for every language lives in _data/i18n.yml.
+lang: en-US
 translations:
   - es-MX   # Mexican Spanish
   - pt-BR   # Brazilian Portuguese
@@ -37,7 +38,8 @@ defaults:
     values:
       layout: app
       nav: apps
-      lang: en
+      lang: en-US
+      permalink: /apps/:name/en-us/
   - scope:
       path: _apps/es-mx
       type: apps

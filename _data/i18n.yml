@@ -4,7 +4,7 @@
 # When you add or change an English string, add or change it in every language.
 # Languages other than English must match the list in _config.yml (translations).
 
-en:
+en-US:
   language_name: English
   # Header and footer
   skip_link: Skip to main content

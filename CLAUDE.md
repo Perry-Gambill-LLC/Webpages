@@ -4,7 +4,7 @@ Jekyll site for Perry & Gambill LLC. See README.md for structure.
 
 ## App page translations: keep them in sync
 
-Every app page (`_apps/<app>.md`) is also published in Mexican Spanish (`_apps/es-mx/<app>.md`) and Brazilian Portuguese (`_apps/pt-br/<app>.md`). Languages are listed under `translations` in `_config.yml`.
+Every app page (`_apps/<app>.md`, published at `/apps/<app>/en-us/`, with `/apps/<app>/` redirecting there) is also published in Mexican Spanish (`_apps/es-mx/<app>.md`) and Brazilian Portuguese (`_apps/pt-br/<app>.md`). Languages are listed under `translations` in `_config.yml`.
 
 Whenever you change an English app page, or add a new one, update both translations in the same change:
 
