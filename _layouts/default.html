@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+{% assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
+<html lang="{{ page.lang | default: site.lang }}">
 <head>
 {% include head.html %}
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
+  <a class="skip-link" href="#main">{{ t.skip_link }}</a>
 
 {% include header.html %}
 

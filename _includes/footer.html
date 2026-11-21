@@ -1,31 +1,32 @@
+{%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer__top">
       <div>
-        <a class="brand" href="{{ '/' | relative_url }}" aria-label="Perry &amp; Gambill LLC, home">
+        <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ t.home_label | escape }}">
           <span class="brand__mark"><img src="{{ '/assets/img/logo-mark.png' | relative_url }}" alt=""></span>
           <span class="brand__name">Perry <em>&amp;</em> Gambill<span class="brand__llc">LLC</span></span>
         </a>
-        <p class="footer__tagline">Strengthening communities through capital, expertise, and innovative technology.</p>
+        <p class="footer__tagline">{{ t.footer_tagline }}</p>
       </div>
       <div class="footer__cols">
         <div>
-          <h4>Company</h4>
+          <h4>{{ t.footer_company }}</h4>
           <ul>
-            <li><a href="{{ '/' | relative_url }}#focus">Focus Areas</a></li>
-            <li><a href="{{ '/' | relative_url }}#mission">Mission</a></li>
-            <li><a href="{{ '/apps/' | relative_url }}">Apps</a></li>
-            <li><a href="{{ '/' | relative_url }}#contact">Contact</a></li>
+            <li><a href="{{ '/' | relative_url }}#focus">{{ t.nav_focus }}</a></li>
+            <li><a href="{{ '/' | relative_url }}#mission">{{ t.nav_mission }}</a></li>
+            <li><a href="{{ '/apps/' | relative_url }}">{{ t.nav_apps }}</a></li>
+            <li><a href="{{ '/' | relative_url }}#contact">{{ t.nav_contact }}</a></li>
           </ul>
         </div>
         <div>
-          <h4>Legal</h4>
+          <h4>{{ t.footer_legal }}</h4>
           <ul>
-            <li><a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a></li>
+            <li><a href="{{ '/legal' | relative_url }}">{{ t.terms_and_conditions | escape }}</a></li>
           </ul>
         </div>
         <div>
-          <h4>Get in touch</h4>
+          <h4>{{ t.footer_get_in_touch }}</h4>
           <ul>
             <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
           </ul>
@@ -33,8 +34,8 @@
       </div>
     </div>
     <div class="footer__bottom">
-      <span>&copy; <span data-year>{{ site.time | date: '%Y' }}</span> Perry &amp; Gambill LLC. All rights reserved.</span>
-      <a href="{{ '/legal' | relative_url }}">Terms &amp; Conditions</a>
+      <span>&copy; <span data-year>{{ site.time | date: '%Y' }}</span> Perry &amp; Gambill LLC. {{ t.rights_reserved }}</span>
+      <a href="{{ '/legal' | relative_url }}">{{ t.terms_and_conditions | escape }}</a>
     </div>
   </div>
 </footer>

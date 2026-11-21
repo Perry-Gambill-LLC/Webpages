@@ -6,6 +6,8 @@
 #  2. Fill in the fields below.
 #  3. Replace the privacy policy text with the policy for this app.
 #     Every [BRACKETED] item must be replaced or removed before publishing.
+#  4. Add translations at _apps/es-mx/<app-name>.md and _apps/pt-br/<app-name>.md
+#     (see "Translations" in README.md), then run: ruby scripts/translations.rb
 #  This folder (_templates) is never published.
 # ============================================================================
 

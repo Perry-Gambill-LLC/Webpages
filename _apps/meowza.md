@@ -18,15 +18,15 @@ privacy_effective_date: August 3, 2026
 ---
 {%- assign email = page.support_email | default: site.email -%}
 
-## 1. Introduction
+## 1. Introduction {#introduction}
 
 Welcome. This Privacy Policy explains how Perry & Gambill LLC ("we," "us," or "our") collects, uses, discloses, and safeguards your information when you use Meowza (the "App"), an AI-powered conversational companion. Please read this policy carefully. If you disagree with its terms, please discontinue use of the App.
 
 We reserve the right to make changes to this Privacy Policy at any time. We will notify you of significant changes by updating the "Last Updated" date above and, where appropriate, through in-app notifications or email.
 
-## 2. Information We Collect
+## 2. Information We Collect {#information-we-collect}
 
-### 2.1 Information You Provide Directly
+### 2.1 Information You Provide Directly {#information-you-provide-directly}
 
 - **Account Information:** Name, email address, and sign-in credentials when you register.
 - **Profile Data:** Optional profile details you choose to provide, including your date of birth (used to personalize your companion experience, such as recognizing your birthday).
@@ -34,19 +34,19 @@ We reserve the right to make changes to this Privacy Policy at any time. We will
 - **Communications:** Feedback or support requests you send us.
 - **Payment Information:** If applicable, billing name, address, and payment method details (processed securely by third-party payment processors — we do not store full card numbers).
 
-### 2.2 Information Collected Automatically
+### 2.2 Information Collected Automatically {#information-collected-automatically}
 
 - **Usage Data:** Features accessed, actions taken, session duration, and frequency of use.
 - **Device Information:** Device type, operating system, browser type and version, unique device identifiers.
 - **Log Data:** IP address, access timestamps, error logs, and referring URLs.
 - **Cookies & Tracking Technologies:** We use cookies, web beacons, and similar technologies to maintain sessions and analyze usage patterns.
 
-### 2.3 Information from Third Parties
+### 2.3 Information from Third Parties {#information-from-third-parties}
 
 - **OAuth Providers:** If you sign in via Apple, we receive basic profile information (name, email) as permitted by your settings with that provider.
 - **Analytics Partners:** Aggregated and anonymized usage statistics from analytics services.
 
-## 3. How We Use Your Information
+## 3. How We Use Your Information {#how-we-use-your-information}
 
 We use the information we collect to:
 
@@ -64,7 +64,7 @@ We use the information we collect to:
 
 We do not sell your personal information to third parties.
 
-## 4. Legal Bases for Processing (GDPR)
+## 4. Legal Bases for Processing (GDPR) {#legal-bases-for-processing-gdpr}
 
 If you are located in the European Economic Area (EEA) or United Kingdom, our legal bases for processing your personal data are:
 
@@ -75,7 +75,7 @@ If you are located in the European Economic Area (EEA) or United Kingdom, our le
 
 You may withdraw consent at any time where we rely on it, without affecting the lawfulness of prior processing.
 
-## 5. Sharing Your Information
+## 5. Sharing Your Information {#sharing-your-information}
 
 We may share your information with:
 
@@ -84,11 +84,11 @@ We may share your information with:
 - **Legal Requirements:** When required by law, court order, or governmental authority, or to protect the rights, property, or safety of our users or the public.
 - **With Your Consent:** In any other circumstances where you have explicitly authorized disclosure.
 
-## 6. Data Retention
+## 6. Data Retention {#data-retention}
 
 We retain your personal information for as long as your account is active or as needed to provide services. You may request deletion of your account at any time (see Section 8). After deletion, we may retain certain data in anonymized or aggregated form, or where required by law, for a period not exceeding **90 days** following your request.
 
-## 7. Data Security
+## 7. Data Security {#data-security}
 
 We implement industry-standard technical and organizational measures to protect your information, including:
 
@@ -98,7 +98,7 @@ We implement industry-standard technical and organizational measures to protect 
 
 No method of transmission over the internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your data, we cannot guarantee absolute security.
 
-## 8. Your Rights and Choices
+## 8. Your Rights and Choices {#your-rights-and-choices}
 
 Depending on your location, you may have the following rights:
 
@@ -112,21 +112,21 @@ Depending on your location, you may have the following rights:
 
 To exercise any of these rights, contact us at the address in Section 11. We will respond within **30 days**.
 
-## 9. Children's Privacy
+## 9. Children's Privacy {#childrens-privacy}
 
 The App is not directed to children under the age of **13** (or **16** in the EEA). We do not knowingly collect personal information from children. If we become aware that we have inadvertently collected data from a child under the applicable age, we will take steps to delete it promptly. If you believe a child has provided us with personal information, please contact us immediately.
 
-## 10. Third-Party Links and Services
+## 10. Third-Party Links and Services {#third-party-links-and-services}
 
 The App may contain links to third-party websites or integrate with third-party services. This Privacy Policy does not apply to those external services. We encourage you to review the privacy policies of any third-party services you access through the App.
 
-## 11. Contact Us
+## 11. Contact Us {#contact-us}
 
 If you have questions, concerns, or requests regarding this Privacy Policy, please contact us at [{{ email }}](mailto:{{ email }}).
 
 If you are located in the EEA and believe we have not adequately addressed your concerns, you have the right to lodge a complaint with your local data protection authority.
 
-## 12. Changes to This Policy
+## 12. Changes to This Policy {#changes-to-this-policy}
 
 We may update this Privacy Policy periodically. When we do, we will revise the "Last Updated" date at the top of this page. For material changes, we will provide more prominent notice (such as an in-app banner or email notification). Your continued use of the App after changes take effect constitutes your acceptance of the revised policy.
 

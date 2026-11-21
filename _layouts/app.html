@@ -2,32 +2,55 @@
 layout: default
 ---
 {%- comment -%}
-  Support + Privacy Policy page for a single app.
-  Data comes from the app's front matter in _apps/<name>.md; the Markdown body is the privacy policy.
+  Support + Privacy Policy page for a single app, in any language.
+  The English page (_apps/<name>.md) holds the app's settings: name, icon, App Store link, support email, terms link.
+  A translation (_apps/<lang>/<name>.md) supplies only its translated text; everything else comes from the English page.
+  Interface text comes from _data/i18n.yml. The Markdown body is the privacy policy.
 {%- endcomment -%}
-{%- assign support_email = page.support_email | default: site.email -%}
-{%- assign terms_url = page.terms_url | default: site.app_terms_url -%}
+{%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
+{%- assign app = site.apps | where: "slug", page.slug | where: "lang", site.lang | first | default: page -%}
+{%- assign versions = site.apps | where: "slug", page.slug -%}
+{%- assign languages = site.translations | unshift: site.lang -%}
+{%- assign support_email = app.support_email | default: site.email -%}
+{%- assign support_subject = t.support_subject | replace: "%app%", app.name | uri_escape -%}
+{%- assign terms_url = app.terms_url | default: site.app_terms_url -%}
+{%- assign tagline = page.tagline | default: app.tagline -%}
 {%- assign toc_parts = content | split: '<h2 id="' -%}
 
 <section class="page-hero app-hero">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ '/apps/' | relative_url }}">Apps</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{{ page.name }}</span>
-    </nav>
+    <div class="app-hero__bar">
+      <nav class="crumbs" aria-label="{{ t.breadcrumb }}">
+        <a href="{{ '/apps/' | relative_url }}">{{ t.nav_apps }}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ app.name }}</span>
+      </nav>
+      {%- if versions.size > 1 %}
+      <nav class="lang-switch" aria-label="{{ t.language }}">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c-2 2-2 11 0 13M8 1.5c2 2 2 11 0 13"/></svg>
+        <ul>
+          {%- for code in languages %}
+          {%- assign version = versions | where: "lang", code | first %}
+          {%- if version %}
+          <li><a href="{{ version.url | relative_url }}" hreflang="{{ code }}" lang="{{ code }}"{% if code == page.lang %} aria-current="page"{% endif %}>{{ site.data.i18n[code].language_name }}</a></li>
+          {%- endif %}
+          {%- endfor %}
+        </ul>
+      </nav>
+      {%- endif %}
+    </div>
 
     <div class="app-hero__inner">
-      {% include app-icon.html app=page size="lg" %}
+      {% include app-icon.html app=app size="lg" %}
       <div>
-        <span class="eyebrow">Support &amp; Privacy Policy</span>
-        <h1>{{ page.name }}</h1>
-        {%- if page.tagline %}
-        <p class="app-hero__tagline">{{ page.tagline }}</p>
+        <span class="eyebrow">{{ t.support_and_privacy | escape }}</span>
+        <h1>{{ app.name }}</h1>
+        {%- if tagline %}
+        <p class="app-hero__tagline">{{ tagline }}</p>
         {%- endif %}
-        {%- if page.platforms %}
+        {%- if app.platforms %}
         <ul class="app-hero__platforms">
-          {%- for platform in page.platforms %}
+          {%- for platform in app.platforms %}
           <li>{{ platform }}</li>
           {%- endfor %}
         </ul>
@@ -36,34 +59,34 @@ layout: default
     </div>
 
     <div class="hero__actions">
-      {%- if page.app_store_url %}
-      <a class="btn btn--primary" href="{{ page.app_store_url }}" rel="noopener">
-        Download on the App Store
+      {%- if app.app_store_url %}
+      <a class="btn btn--primary" href="{{ app.app_store_url }}" rel="noopener">
+        {{ t.download }}
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
       {%- endif %}
-      <a class="btn {% if page.app_store_url %}btn--ghost{% else %}btn--primary{% endif %}" href="#support">Get support</a>
-      <a class="btn btn--ghost" href="#privacy">Read the privacy policy</a>
+      <a class="btn {% if app.app_store_url %}btn--ghost{% else %}btn--primary{% endif %}" href="#support">{{ t.get_support }}</a>
+      <a class="btn btn--ghost" href="#privacy">{{ t.read_privacy }}</a>
     </div>
   </div>
 </section>
 
 <section class="wrap app-support" id="support" aria-labelledby="support-title">
   <div class="app-support__card app-support__card--main">
-    <span class="eyebrow">Support</span>
-    <h2 id="support-title">Need help with {{ page.name }}?</h2>
-    <p>For support with the {{ page.name }} app, please contact us at <a href="mailto:{{ support_email }}?subject={{ page.name | append: ' Support' | uri_escape }}">{{ support_email }}</a>.</p>
-    <a class="btn btn--dark" href="mailto:{{ support_email }}?subject={{ page.name | append: ' Support' | uri_escape }}">
-      Email support
+    <span class="eyebrow">{{ t.support }}</span>
+    <h2 id="support-title">{{ t.need_help | replace: "%app%", app.name }}</h2>
+    <p>{{ t.support_text | replace: "%app%", app.name }} <a href="mailto:{{ support_email }}?subject={{ support_subject }}">{{ support_email }}</a>.</p>
+    <a class="btn btn--dark" href="mailto:{{ support_email }}?subject={{ support_subject }}">
+      {{ t.email_support }}
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
   </div>
   <div class="app-support__card">
-    <h3>Helpful links</h3>
+    <h3>{{ t.helpful_links }}</h3>
     <ul class="link-list">
-      <li><a href="#privacy">{{ page.name }} Privacy Policy</a></li>
-      <li><a href="{{ terms_url }}" rel="noopener">{{ page.name }} Terms of Service</a></li>
-      <li><a href="{{ '/apps/' | relative_url }}">All apps by Perry &amp; Gambill</a></li>
+      <li><a href="#privacy">{{ t.privacy_link | replace: "%app%", app.name }}</a></li>
+      <li><a href="{{ terms_url }}" rel="noopener">{{ t.terms_link | replace: "%app%", app.name }}</a></li>
+      <li><a href="{{ '/apps/' | relative_url }}">{{ t.all_apps | escape }}</a></li>
     </ul>
   </div>
 </section>
@@ -71,7 +94,7 @@ layout: default
 <div class="wrap legal app-privacy{% if toc_parts.size <= 1 %} legal--single{% endif %}" id="privacy">
   {%- if toc_parts.size > 1 %}
   <aside class="toc" aria-labelledby="toc-title">
-    <h2 id="toc-title">Contents</h2>
+    <h2 id="toc-title">{{ t.contents }}</h2>
     <ol>
       {%- for part in toc_parts offset:1 %}
       {%- assign heading_id = part | split: '"' | first %}
@@ -84,8 +107,11 @@ layout: default
 
   <article class="legal__body">
     <header class="legal__head">
-      <h2 class="legal__title">Privacy Policy</h2>
-      <p class="legal__meta">{{ page.name }}{% if page.privacy_effective_date %} &middot; Effective date: <strong>{{ page.privacy_effective_date }}</strong>{% endif %}</p>
+      <h2 class="legal__title">{{ t.privacy_policy }}</h2>
+      <p class="legal__meta">{{ app.name }}{% if page.privacy_effective_date %} &middot; {{ t.effective_date }}: <strong>{{ page.privacy_effective_date }}</strong>{% endif %}</p>
+      {%- if page.lang != site.lang and t.translation_notice != "" %}
+      <p class="legal__notice">{{ t.translation_notice }}</p>
+      {%- endif %}
     </header>
     <div class="prose">
 {{ content }}

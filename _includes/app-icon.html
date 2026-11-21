@@ -3,8 +3,9 @@
   Usage: {% include app-icon.html app=page size="lg" %}
 {%- endcomment -%}
 {%- assign app = include.app -%}
+{%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
 {%- if app.icon and app.icon != "" -%}
-<img class="app-icon app-icon--{{ include.size | default: 'md' }}" src="{{ app.icon | relative_url }}" alt="{{ app.name }} app icon" width="128" height="128">
+<img class="app-icon app-icon--{{ include.size | default: 'md' }}" src="{{ app.icon | relative_url }}" alt="{{ t.app_icon | replace: "%app%", app.name }}" width="128" height="128">
 {%- else -%}
-<div class="app-icon app-icon--{{ include.size | default: 'md' }} app-icon--placeholder" role="img" aria-label="{{ app.name }} app icon placeholder"><span>{{ app.name | slice: 0 }}</span></div>
+<div class="app-icon app-icon--{{ include.size | default: 'md' }} app-icon--placeholder" role="img" aria-label="{{ t.app_icon_placeholder | replace: "%app%", app.name }}"><span>{{ app.name | slice: 0 }}</span></div>
 {%- endif -%}

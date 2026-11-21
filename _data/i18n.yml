@@ -1,0 +1,134 @@
+# Interface text for app pages and the header/footer they share, by language.
+# %app% is replaced with the app's name.
+#
+# When you add or change an English string, add or change it in every language.
+# Languages other than English must match the list in _config.yml (translations).
+
+en:
+  language_name: English
+  # Header and footer
+  skip_link: Skip to main content
+  home_label: Perry & Gambill LLC, home
+  toggle_nav: Toggle navigation
+  primary_nav: Primary
+  nav_focus: Focus Areas
+  nav_mission: Mission
+  nav_apps: Apps
+  nav_legal: Legal
+  nav_contact: Contact
+  contact_us: Contact Us
+  footer_tagline: Strengthening communities through capital, expertise, and innovative technology.
+  footer_company: Company
+  footer_legal: Legal
+  footer_get_in_touch: Get in touch
+  terms_and_conditions: Terms & Conditions
+  rights_reserved: All rights reserved.
+  # App pages
+  page_title: "%app% Support & Privacy Policy"
+  breadcrumb: Breadcrumb
+  language: Language
+  app_icon: "%app% app icon"
+  app_icon_placeholder: "%app% app icon placeholder"
+  support_and_privacy: Support & Privacy Policy
+  download: Download on the App Store
+  get_support: Get support
+  read_privacy: Read the privacy policy
+  support: Support
+  need_help: Need help with %app%?
+  support_text: For support with the %app% app, please contact us at
+  support_subject: "%app% Support"
+  email_support: Email support
+  helpful_links: Helpful links
+  privacy_link: "%app% Privacy Policy"
+  terms_link: "%app% Terms of Service"
+  all_apps: All apps by Perry & Gambill
+  contents: Contents
+  privacy_policy: Privacy Policy
+  effective_date: Effective date
+  translation_notice: ""
+
+es-MX:
+  language_name: Español
+  # Header and footer
+  skip_link: Saltar al contenido principal
+  home_label: Perry & Gambill LLC, inicio
+  toggle_nav: Mostrar u ocultar el menú
+  primary_nav: Principal
+  nav_focus: Áreas de enfoque
+  nav_mission: Misión
+  nav_apps: Apps
+  nav_legal: Legal
+  nav_contact: Contacto
+  contact_us: Contáctanos
+  footer_tagline: Fortalecemos comunidades con capital, experiencia y tecnología innovadora.
+  footer_company: Empresa
+  footer_legal: Legal
+  footer_get_in_touch: Escríbenos
+  terms_and_conditions: Términos y condiciones
+  rights_reserved: Todos los derechos reservados.
+  # App pages
+  page_title: Soporte y política de privacidad de %app%
+  breadcrumb: Ruta de navegación
+  language: Idioma
+  app_icon: Ícono de la app %app%
+  app_icon_placeholder: Ícono provisional de la app %app%
+  support_and_privacy: Soporte y política de privacidad
+  download: Descárgala en el App Store
+  get_support: Obtener soporte
+  read_privacy: Leer la política de privacidad
+  support: Soporte
+  need_help: ¿Necesitas ayuda con %app%?
+  support_text: Si necesitas soporte con la app %app%, escríbenos a
+  support_subject: Soporte de %app%
+  email_support: Escribir a soporte
+  helpful_links: Enlaces útiles
+  privacy_link: Política de privacidad de %app%
+  terms_link: Términos del servicio de %app%
+  all_apps: Todas las apps de Perry & Gambill
+  contents: Contenido
+  privacy_policy: Política de privacidad
+  effective_date: Fecha de entrada en vigor
+  translation_notice: Esta es una traducción de la versión original en inglés. Si hay alguna diferencia entre ambas, prevalece la versión en inglés.
+
+pt-BR:
+  language_name: Português
+  # Header and footer
+  skip_link: Pular para o conteúdo principal
+  home_label: Perry & Gambill LLC, página inicial
+  toggle_nav: Abrir ou fechar o menu
+  primary_nav: Principal
+  nav_focus: Áreas de atuação
+  nav_mission: Missão
+  nav_apps: Apps
+  nav_legal: Jurídico
+  nav_contact: Contato
+  contact_us: Fale conosco
+  footer_tagline: Fortalecemos comunidades com capital, conhecimento especializado e tecnologia inovadora.
+  footer_company: Empresa
+  footer_legal: Jurídico
+  footer_get_in_touch: Entre em contato
+  terms_and_conditions: Termos e Condições
+  rights_reserved: Todos os direitos reservados.
+  # App pages
+  page_title: Suporte e Política de Privacidade do %app%
+  breadcrumb: Navegação estrutural
+  language: Idioma
+  app_icon: Ícone do app %app%
+  app_icon_placeholder: Ícone provisório do app %app%
+  support_and_privacy: Suporte e Política de Privacidade
+  download: Baixar na App Store
+  get_support: Obter suporte
+  read_privacy: Ler a política de privacidade
+  support: Suporte
+  need_help: Precisa de ajuda com o %app%?
+  support_text: Para obter suporte com o app %app%, entre em contato pelo e-mail
+  support_subject: Suporte do %app%
+  email_support: Enviar e-mail ao suporte
+  helpful_links: Links úteis
+  privacy_link: Política de Privacidade do %app%
+  terms_link: Termos de Serviço do %app%
+  all_apps: Todos os apps da Perry & Gambill
+  contents: Conteúdo
+  privacy_policy: Política de Privacidade
+  effective_date: Data de vigência
+  translation_notice: Esta é uma tradução da versão original em inglês. Em caso de divergência, prevalece a versão em inglês.

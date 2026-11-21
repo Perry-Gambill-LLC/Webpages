@@ -6,6 +6,15 @@ email: support.perrygambill@icloud.com   # default contact/support email across 
 domain: https://www.perrygambill.com      # used for canonical links and social previews
 app_terms_url: https://www.apple.com/legal/internet-services/itunes/dev/stdeula/   # default Terms of Service for app pages (Apple's standard EULA); override per app with terms_url
 
+# Languages -------------------------------------------------------------------
+# The site is written in English. Each app page is also published in these
+# languages, from _apps/<lowercase code>/<app>.md at /apps/<app>/<lowercase code>/.
+# Interface text for every language lives in _data/i18n.yml.
+lang: en
+translations:
+  - es-MX   # Mexican Spanish
+  - pt-BR   # Brazilian Portuguese
+
 # Build settings --------------------------------------------------------------
 markdown: kramdown
 kramdown:
@@ -28,6 +37,19 @@ defaults:
     values:
       layout: app
       nav: apps
+      lang: en
+  - scope:
+      path: _apps/es-mx
+      type: apps
+    values:
+      lang: es-MX
+      permalink: /apps/:name/es-mx/
+  - scope:
+      path: _apps/pt-br
+      type: apps
+    values:
+      lang: pt-BR
+      permalink: /apps/:name/pt-br/
 
 exclude:
   - README.md
@@ -35,3 +57,5 @@ exclude:
   - Gemfile.lock
   - vendor
   - _templates
+  - scripts
+  - CLAUDE.md

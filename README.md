@@ -10,6 +10,9 @@ _layouts/default.html    Page shell: head, header, footer
 _layouts/app.html        Template for every app's Support & Privacy page
 _includes/               Shared pieces (head, header, footer, app icon)
 _apps/                   One Markdown file per app  ->  /apps/<file-name>/
+_apps/es-mx/, _apps/pt-br/  Translations of each app page  ->  /apps/<file-name>/es-mx/ etc.
+_data/i18n.yml           Interface text for app pages, header and footer, per language
+scripts/translations.rb  Checks that translations are complete and up to date
 _templates/app.md        Starter file for a new app (never published)
 index.html               Home page
 legal.html               Terms and Conditions (served at /legal)
@@ -28,7 +31,8 @@ assets/img/apps/         App icons
    `terms_url` sets the app's Terms of Service link; leave it blank to use Apple's standard EULA (`app_terms_url` in `_config.yml`).
    `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
 3. Replace the privacy policy text below the front matter. It's plain Markdown; each `## Heading` is added to the page's table of contents automatically.
-4. Commit and push. The app appears on `/apps/` and is linked from the home page.
+4. Add the Mexican Spanish and Brazilian Portuguese translations (see [Translations](#translations)).
+5. Commit and push. The app appears on `/apps/` and is linked from the home page.
 
 Use the page URL for both the **Support URL** and the **Privacy Policy URL** in App Store Connect. To point straight at each section, use `/apps/my-app/#support` and `/apps/my-app/#privacy`.
 
@@ -41,6 +45,31 @@ icon: /assets/img/apps/my-app.png
 ```
 
 Until an icon is set, the page shows a placeholder tile with the app's first letter.
+
+## Translations
+
+Each app page is also published in Mexican Spanish and Brazilian Portuguese, at `/apps/<app>/es-mx/` and `/apps/<app>/pt-br/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
+
+- A translation lives at `_apps/es-mx/<app>.md` or `_apps/pt-br/<app>.md`, with the same file name as the English page.
+- Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date`, plus `source_hash`. Everything else (name, icon, App Store link, support email, terms link) comes from the English page.
+- Each heading keeps the English heading's ID, written explicitly: `## Información que recopilamos {#information-we-collect}`.
+- Buttons, labels, header and footer text come from `_data/i18n.yml`.
+
+**When you change an English app page, update both translations in the same commit.** To check:
+
+```sh
+ruby scripts/translations.rb
+```
+
+It lists any translation that's missing or older than its English page, with the `git diff` of the English changes to translate. After updating a translation, mark it as current:
+
+```sh
+ruby scripts/translations.rb stamp _apps/es-mx/<app>.md _apps/pt-br/<app>.md
+```
+
+The same check runs on GitHub (Actions → Translations) on every push to `main`. A failed check doesn't stop the site from publishing; it just flags that the translations are behind.
+
+In App Store Connect, set each localization's Privacy Policy URL and Support URL to its translated page: Spanish (Mexico) → `/apps/<app>/es-mx/`, Portuguese (Brazil) → `/apps/<app>/pt-br/`.
 
 ## Changing the contact email
 

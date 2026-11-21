@@ -952,3 +952,48 @@ p { margin: 0; }
   background-clip: text;
   color: transparent;
 }
+
+/* App page language switcher ---------------------------------------------- */
+.app-hero__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted-dark);
+}
+.lang-switch svg { width: 16px; height: 16px; flex: none; }
+.lang-switch ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lang-switch a {
+  display: block;
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--muted-dark);
+  text-decoration: none;
+}
+.lang-switch a:hover { color: #fff; }
+.lang-switch a[aria-current] {
+  border-color: var(--line-dark);
+  color: #fff;
+}
+
+.legal__notice {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14.5px;
+  font-style: italic;
+}

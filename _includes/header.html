@@ -1,23 +1,24 @@
+{%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Perry &amp; Gambill LLC, home">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ t.home_label | escape }}">
       <span class="brand__mark"><img src="{{ '/assets/img/logo-mark.png' | relative_url }}" alt=""></span>
       <span class="brand__name">Perry <em>&amp;</em> Gambill<span class="brand__llc">LLC</span></span>
     </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="{{ t.toggle_nav }}">
       <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
 
-    <nav class="nav" id="site-nav" aria-label="Primary">
+    <nav class="nav" id="site-nav" aria-label="{{ t.primary_nav }}">
       <ul class="nav__list">
-        <li><a href="{{ '/' | relative_url }}#focus">Focus Areas</a></li>
-        <li><a href="{{ '/' | relative_url }}#mission">Mission</a></li>
-        <li><a href="{{ '/apps/' | relative_url }}"{% if page.nav == 'apps' %} aria-current="page"{% endif %}>Apps</a></li>
-        <li><a href="{{ '/legal' | relative_url }}"{% if page.nav == 'legal' %} aria-current="page"{% endif %}>Legal</a></li>
+        <li><a href="{{ '/' | relative_url }}#focus">{{ t.nav_focus }}</a></li>
+        <li><a href="{{ '/' | relative_url }}#mission">{{ t.nav_mission }}</a></li>
+        <li><a href="{{ '/apps/' | relative_url }}"{% if page.nav == 'apps' %} aria-current="page"{% endif %}>{{ t.nav_apps }}</a></li>
+        <li><a href="{{ '/legal' | relative_url }}"{% if page.nav == 'legal' %} aria-current="page"{% endif %}>{{ t.nav_legal }}</a></li>
       </ul>
-      <a class="btn btn--primary" href="{{ '/' | relative_url }}#contact">Contact Us</a>
+      <a class="btn btn--primary" href="{{ '/' | relative_url }}#contact">{{ t.contact_us }}</a>
     </nav>
   </div>
 </header>

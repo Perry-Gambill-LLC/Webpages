@@ -5,8 +5,10 @@ description: Apps and software by Perry & Gambill LLC, with support and privacy 
 nav: apps
 ---
 {%- comment -%} Apps with an `order` value come first (lowest first); the rest follow alphabetically. {%- endcomment -%}
-{%- assign ordered_apps = site.apps | where_exp: "app", "app.order" | sort: "order" -%}
-{%- assign unordered_apps = site.apps | where_exp: "app", "app.order == nil" | sort: "name" -%}
+{%- comment -%} Only the English pages; translations are reached from each app's page. {%- endcomment -%}
+{%- assign english_apps = site.apps | where: "lang", site.lang -%}
+{%- assign ordered_apps = english_apps | where_exp: "app", "app.order" | sort: "order" -%}
+{%- assign unordered_apps = english_apps | where_exp: "app", "app.order == nil" | sort: "name" -%}
 {%- assign apps = ordered_apps | concat: unordered_apps -%}
 <section class="page-hero">
   <div class="wrap">

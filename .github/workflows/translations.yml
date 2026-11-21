@@ -1,0 +1,20 @@
+# Fails when an app page's translations are missing or behind the English page.
+# (GitHub Pages still publishes; this flags the commit so the translations get updated.)
+name: Translations
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history, so the check can show which English changes need translating
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+      - run: ruby scripts/translations.rb
