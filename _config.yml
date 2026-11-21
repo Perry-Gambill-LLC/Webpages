@@ -27,10 +27,14 @@ plugins:
   - jekyll-sitemap
 
 # Each file in _apps/ becomes a support + privacy page at /apps/<file-name>/
+# Each file in _terms/<platform>/ is that app's Terms of Use on that platform, at
+# /apps/<file-name>/<language>/terms/<platform>/ (the file name is the app's, as in _apps/)
 collections:
   apps:
     output: true
     permalink: /apps/:name/
+  terms:
+    output: true
 
 defaults:
   - scope:
@@ -52,6 +56,30 @@ defaults:
     values:
       lang: pt-BR
       permalink: /apps/:name/pt-br/
+  - scope:
+      type: terms
+    values:
+      layout: terms
+      nav: apps
+      lang: en-US
+  - scope:
+      path: _terms/android
+      type: terms
+    values:
+      platform: android
+      permalink: /apps/:name/en-us/terms/android/
+  - scope:
+      path: _terms/android/es-mx
+      type: terms
+    values:
+      lang: es-MX
+      permalink: /apps/:name/es-mx/terms/android/
+  - scope:
+      path: _terms/android/pt-br
+      type: terms
+    values:
+      lang: pt-BR
+      permalink: /apps/:name/pt-br/terms/android/
 
 exclude:
   - README.md

@@ -8,9 +8,12 @@ The company website, built with [Jekyll](https://jekyllrb.com/), which GitHub Pa
 _config.yml              Site settings (title, default email, plugins)
 _layouts/default.html    Page shell: head, header, footer
 _layouts/app.html        Template for every app's Support & Privacy page
+_layouts/terms.html      Template for an app's Terms of Use on one platform
 _includes/               Shared pieces (head, header, footer, app icon)
 _apps/                   One Markdown file per app (English)  ->  /apps/<file-name>/en-us/
 _apps/es-mx/, _apps/pt-br/  Translations of each app page  ->  /apps/<file-name>/es-mx/ etc.
+_terms/android/          An app's own Terms of Use on Android, named like its _apps/ file
+                           ->  /apps/<file-name>/en-us/terms/android/ (translations in es-mx/, pt-br/)
 _data/i18n.yml           Interface text for app pages, header and footer, per language
 scripts/translations.rb  Checks that translations are complete and up to date
 _templates/app.md        Starter file for a new app (never published)
@@ -29,6 +32,7 @@ assets/img/apps/         App icons
    The file name becomes the URL: `/apps/my-app/en-us/`. Set `redirect_from` to `/apps/my-app/` (as in the template) so the short URL `/apps/my-app/` redirects there.
 2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `order`, `app_store_url`, `platforms`, `support_email` and `terms_url`.
    `terms_url` sets the app's Terms of Service link; leave it blank to use Apple's standard EULA (`app_terms_url` in `_config.yml`).
+   Apple's EULA only covers the App Store. If the app is also on Google Play, give it its own terms there (see [Terms of Use for Android](#terms-of-use-for-android)).
    `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
 3. Replace the privacy policy text below the front matter. It's plain Markdown; each `## Heading` is added to the page's table of contents automatically.
 4. Add the Mexican Spanish and Brazilian Portuguese translations (see [Translations](#translations)).
@@ -46,12 +50,23 @@ icon: /assets/img/apps/my-app.png
 
 Until an icon is set, the page shows a placeholder tile with the app's first letter.
 
+## Terms of Use for Android
+
+On iPhone, apps use Apple's standard EULA. Google Play has no standard terms, so an app on Android has its own: `_terms/android/<app>.md`, with the same file name as the app's `_apps/` page. Amigology's is `_terms/android/amigology.md`.
+
+- It's published at `/apps/<app>/en-us/terms/android/`, and the short URL `/apps/<app>/terms/android/` (set it under `redirect_from`) redirects there. Translations are at `/apps/<app>/es-mx/terms/android/` and `/apps/<app>/pt-br/terms/android/`.
+- Its front matter is `description` and `effective_date`. The page title, heading and icon come from the app and `_data/i18n.yml`.
+- Once it exists, the app's page lists it under Helpful links, beside Apple's terms (labelled "for iPhone").
+- Link the app's Android build to the page for its language. Translations work as for app pages (below).
+
+Another platform would get its own folder, e.g. `_terms/<platform>/`, plus a `defaults` entry in `_config.yml` and `terms_heading_<platform>` / `terms_link_<platform>` strings in `_data/i18n.yml`.
+
 ## Translations
 
-Each app page is published in US English, Mexican Spanish and Brazilian Portuguese, at `/apps/<app>/en-us/`, `/apps/<app>/es-mx/` and `/apps/<app>/pt-br/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
+Each app page (and each Terms of Use page, the same way, in `_terms/<platform>/<lang>/`) is published in US English, Mexican Spanish and Brazilian Portuguese, at `/apps/<app>/en-us/`, `/apps/<app>/es-mx/` and `/apps/<app>/pt-br/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
 
 - A translation lives at `_apps/es-mx/<app>.md` or `_apps/pt-br/<app>.md`, with the same file name as the English page.
-- Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date`, plus `source_hash`. Everything else (name, icon, App Store link, support email, terms link) comes from the English page.
+- Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date` (for terms: `description` and `effective_date`), plus `source_hash`. Everything else (name, icon, App Store link, support email, terms link) comes from the English page.
 - Each heading keeps the English heading's ID, written explicitly: `## Información que recopilamos {#information-we-collect}`.
 - Buttons, labels, header and footer text come from `_data/i18n.yml`.
 
@@ -65,6 +80,7 @@ It lists any translation that's missing or older than its English page, with the
 
 ```sh
 ruby scripts/translations.rb stamp _apps/es-mx/<app>.md _apps/pt-br/<app>.md
+ruby scripts/translations.rb stamp _terms/android/es-mx/<app>.md _terms/android/pt-br/<app>.md
 ```
 
 The same check runs on GitHub (Actions → Translations) on every push to `main`. A failed check doesn't stop the site from publishing; it just flags that the translations are behind.

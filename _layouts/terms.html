@@ -1,0 +1,67 @@
+---
+layout: default
+---
+{%- comment -%}
+  An app's Terms of Use on one platform (_terms/<platform>/<app>.md), in any language.
+  The app's name and icon come from its English app page (_apps/<app>.md).
+  A translation (_terms/<platform>/<lang>/<app>.md) supplies only its translated text.
+  Interface text comes from _data/i18n.yml. The Markdown body is the terms.
+{%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
+{%- assign app = site.apps | where: "slug", page.slug | where: "lang", site.lang | first -%}
+{%- assign app_en = app -%}
+{%- assign app_page = site.apps | where: "slug", page.slug | where: "lang", page.lang | first | default: app_en -%}
+{%- assign versions = site.terms | where: "slug", page.slug | where: "platform", page.platform -%}
+{%- assign heading_key = 'terms_heading_' | append: page.platform -%}
+{%- assign heading = t[heading_key] -%}
+{%- assign toc_parts = content | split: '<h2 id="' -%}
+
+<section class="page-hero app-hero">
+  <div class="wrap">
+    <div class="app-hero__bar">
+      <nav class="crumbs" aria-label="{{ t.breadcrumb }}">
+        <a href="{{ '/apps/' | relative_url }}">{{ t.nav_apps }}</a>
+        <span aria-hidden="true">/</span>
+        <a href="{{ app_page.url | relative_url }}">{{ app.name }}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ heading }}</span>
+      </nav>
+      {%- include lang-switch.html versions=versions %}
+    </div>
+
+    <div class="app-hero__inner">
+      {% include app-icon.html app=app size="lg" %}
+      <div>
+        <span class="eyebrow">{{ app.name }}</span>
+        <h1>{{ heading }}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap legal app-privacy{% if toc_parts.size <= 1 %} legal--single{% endif %}">
+  {%- if toc_parts.size > 1 %}
+  <aside class="toc" aria-labelledby="toc-title">
+    <h2 id="toc-title">{{ t.contents }}</h2>
+    <ol>
+      {%- for part in toc_parts offset:1 %}
+      {%- assign heading_id = part | split: '"' | first %}
+      {%- assign heading_text = part | split: '</h2>' | first | split: '">' | last | strip_html %}
+      <li><a href="#{{ heading_id }}">{{ heading_text }}</a></li>
+      {%- endfor %}
+    </ol>
+  </aside>
+  {%- endif %}
+
+  <article class="legal__body">
+    <header class="legal__head">
+      <p class="legal__meta">Perry &amp; Gambill LLC{% if page.effective_date %} &middot; {{ t.effective_date }}: <strong>{{ page.effective_date }}</strong>{% endif %}</p>
+      {%- if page.lang != site.lang and t.translation_notice != "" %}
+      <p class="legal__notice">{{ t.translation_notice }}</p>
+      {%- endif %}
+    </header>
+    <div class="prose">
+{{ content }}
+    </div>
+  </article>
+</div>

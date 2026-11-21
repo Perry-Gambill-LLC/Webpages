@@ -1,24 +1,27 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Keeps app page translations in step with their English pages.
+# Keeps translated pages in step with their English pages: each app's page
+# (_apps/<app>.md) and each app's Terms of Use on a platform (_terms/<platform>/<app>.md).
 #
 #   ruby scripts/translations.rb                 Check every translation (exits 1 on any problem)
 #   ruby scripts/translations.rb stamp FILE...   Mark translations as up to date with the current English page
 #
-# Each translation (_apps/<lang>/<app>.md) has a `source_hash` in its front
-# matter: a fingerprint of the English page's translatable text (name, tagline,
-# description, privacy_effective_date and the policy itself) at the time it was
-# translated. When the English page changes, the fingerprints no longer match
-# and the check fails, showing the English changes that still need translating.
+# Each translation (_apps/<lang>/<app>.md, _terms/<platform>/<lang>/<app>.md) has
+# a `source_hash` in its front matter: a fingerprint of the English page's
+# translatable text (its translated front matter fields and the body) at the
+# time it was translated. When the English page changes, the fingerprints no
+# longer match and the check fails, showing the English changes that still need
+# translating.
 #
 # Only run `stamp` after the translation really has been updated.
 #
-# The check also makes sure that every English app page redirects its short URL
-# (/apps/<app>/) to the English page, has a translation in
-# each language listed under `translations` in _config.yml, that translations
-# keep the English page's sections (same headings, same IDs, same order), and
-# that _data/i18n.yml has every interface string in every language.
+# The check also makes sure that every English page redirects its short URL
+# (/apps/<app>/, /apps/<app>/terms/<platform>/) to the English page, has a
+# translation in each language listed under `translations` in _config.yml, that
+# translations keep the English page's sections (same headings, same IDs, same
+# order), that every terms page belongs to an app, and that _data/i18n.yml has
+# every interface string in every language.
 
 require "digest"
 require "json"
@@ -27,7 +30,20 @@ require "yaml"
 
 ROOT = File.expand_path("..", __dir__)
 APPS_DIR = File.join(ROOT, "_apps")
-TRANSLATED_FIELDS = %w[name tagline description privacy_effective_date].freeze
+TERMS_DIR = File.join(ROOT, "_terms")
+
+Source = Struct.new(:dir, :fields, :short_url)
+
+# The folders of English pages, each with the front matter fields its translations
+# translate and the short URL each page redirects from.
+def sources
+  apps = Source.new(APPS_DIR, %w[name tagline description privacy_effective_date], ->(app) { "/apps/#{app}/" })
+  terms = Dir[File.join(TERMS_DIR, "*")].select { File.directory?(_1) }.sort.map do |dir|
+    platform = File.basename(dir)
+    Source.new(dir, %w[description effective_date], ->(app) { "/apps/#{app}/terms/#{platform}/" })
+  end
+  [apps, *terms]
+end
 
 def rel(path) = path.delete_prefix("#{ROOT}/")
 
@@ -36,9 +52,9 @@ def parse(text)
   [YAML.safe_load(match[1]) || {}, match[2]]
 end
 
-def fingerprint(text)
+def fingerprint(text, translated_fields)
   data, body = parse(text)
-  fields = TRANSLATED_FIELDS.to_h { |key| [key, data[key].to_s] }
+  fields = translated_fields.to_h { |key| [key, data[key].to_s] }
   Digest::SHA256.hexdigest(JSON.generate(fields.merge("body" => body.strip)))[0, 12]
 end
 
@@ -77,10 +93,10 @@ def git(*args)
 end
 
 # The most recent commit whose copy of the English page has this fingerprint.
-def commit_with_fingerprint(source, hash)
+def commit_with_fingerprint(source, fields, hash)
   (git("log", "--format=%H", "--", rel(source)) || "").split.find do |sha|
     text = git("show", "#{sha}:#{rel(source)}")
-    text && fingerprint(text) == hash
+    text && fingerprint(text, fields) == hash
   rescue StandardError
     false
   end
@@ -89,55 +105,63 @@ end
 def config = YAML.safe_load_file(File.join(ROOT, "_config.yml"))
 def languages = Array(config["translations"])
 def folder(lang) = lang.downcase
-def english_pages = Dir[File.join(APPS_DIR, "*.md")].sort
+def english_pages(source) = Dir[File.join(source.dir, "*.md")].sort
 
 def check
   problems = []
-  english = english_pages
+  count = 0
   folders = languages.map { |lang| folder(lang) }
 
-  english.each do |source|
-    source_text = File.read(source)
-    short_url = "/apps/#{File.basename(source, '.md')}/"
-    unless Array(parse(source_text)[0]["redirect_from"]).include?(short_url)
-      problems << "#{rel(source)}: add #{short_url} under redirect_from, so the short URL redirects to the English page."
+  sources.each do |src|
+    english_pages(src).each do |source|
+      count += 1
+      source_text = File.read(source)
+      app = File.basename(source, ".md")
+      short_url = src.short_url.call(app)
+      unless Array(parse(source_text)[0]["redirect_from"]).include?(short_url)
+        problems << "#{rel(source)}: add #{short_url} under redirect_from, so the short URL redirects to the English page."
+      end
+      if src.dir != APPS_DIR && !File.exist?(File.join(APPS_DIR, File.basename(source)))
+        problems << "#{rel(source)}: no app page _apps/#{File.basename(source)}. The file name must be the app's."
+      end
+      current = fingerprint(source_text, src.fields)
+      source_headings = headings(parse(source_text)[1])
+
+      languages.each do |lang|
+        path = File.join(src.dir, folder(lang), File.basename(source))
+        unless File.exist?(path)
+          problems << "#{rel(path)}: missing. Translate #{rel(source)} into #{lang}."
+          next
+        end
+
+        data, body = parse(File.read(path))
+        recorded = data["source_hash"].to_s
+        if recorded != current
+          message = +"#{rel(path)}: out of date with #{rel(source)}."
+          sha = commit_with_fingerprint(source, src.fields, recorded)
+          message << if sha
+                       "\n    English changes to translate: git diff #{sha[0, 10]} -- #{rel(source)}"
+                     else
+                       "\n    (Couldn't find the English version it was translated from; compare the whole page.)"
+                     end
+          message << "\n    Then: ruby scripts/translations.rb stamp #{rel(path)}"
+          problems << message
+        end
+
+        if (problem = heading_problem(source_headings, headings(body)))
+          problems << "#{rel(path)}: #{problem}"
+        end
+      end
     end
-    current = fingerprint(source_text)
-    source_headings = headings(parse(source_text)[1])
 
-    languages.each do |lang|
-      path = File.join(APPS_DIR, folder(lang), File.basename(source))
-      unless File.exist?(path)
-        problems << "#{rel(path)}: missing. Translate #{rel(source)} into #{lang}."
-        next
+    Dir[File.join(src.dir, "*", "*.md")].sort.each do |path|
+      dir = File.basename(File.dirname(path))
+      english = File.join(src.dir, File.basename(path))
+      if !folders.include?(dir)
+        problems << "#{rel(path)}: folder #{dir}/ isn't a language listed under translations in _config.yml."
+      elsif !File.exist?(english)
+        problems << "#{rel(path)}: no English page #{rel(english)} to translate from."
       end
-
-      data, body = parse(File.read(path))
-      recorded = data["source_hash"].to_s
-      if recorded != current
-        message = +"#{rel(path)}: out of date with #{rel(source)}."
-        sha = commit_with_fingerprint(source, recorded)
-        message << if sha
-                     "\n    English changes to translate: git diff #{sha[0, 10]} -- #{rel(source)}"
-                   else
-                     "\n    (Couldn't find the English version it was translated from; compare the whole page.)"
-                   end
-        message << "\n    Then: ruby scripts/translations.rb stamp #{rel(path)}"
-        problems << message
-      end
-
-      if (problem = heading_problem(source_headings, headings(body)))
-        problems << "#{rel(path)}: #{problem}"
-      end
-    end
-  end
-
-  Dir[File.join(APPS_DIR, "*", "*.md")].sort.each do |path|
-    dir = File.basename(File.dirname(path))
-    if !folders.include?(dir)
-      problems << "#{rel(path)}: folder #{dir}/ isn't a language listed under translations in _config.yml."
-    elsif !File.exist?(File.join(APPS_DIR, File.basename(path)))
-      problems << "#{rel(path)}: no English page _apps/#{File.basename(path)} to translate from."
     end
   end
 
@@ -152,7 +176,7 @@ def check
   end
 
   if problems.empty?
-    puts "Translations are up to date (#{english.size} apps × #{languages.size} languages)."
+    puts "Translations are up to date (#{count} pages × #{languages.size} languages)."
     true
   else
     warn "Translations need attention:\n\n"
@@ -162,15 +186,16 @@ def check
 end
 
 def stamp(paths)
-  abort "Usage: ruby scripts/translations.rb stamp _apps/<lang>/<app>.md ..." if paths.empty?
+  abort "Usage: ruby scripts/translations.rb stamp _apps/<lang>/<app>.md _terms/<platform>/<lang>/<app>.md ..." if paths.empty?
 
   paths.each do |arg|
     path = File.expand_path(arg, ROOT)
-    source = File.join(APPS_DIR, File.basename(path))
-    abort "#{arg}: not a translation in _apps/<lang>/" unless File.dirname(File.dirname(path)) == APPS_DIR
+    src = sources.find { _1.dir == File.dirname(File.dirname(path)) }
+    abort "#{arg}: not a translation in _apps/<lang>/ or _terms/<platform>/<lang>/" unless src
+    source = File.join(src.dir, File.basename(path))
     abort "#{arg}: no English page #{rel(source)}" unless File.exist?(source)
 
-    hash = fingerprint(File.read(source))
+    hash = fingerprint(File.read(source), src.fields)
     text = File.read(path)
     abort "#{arg}: add a `source_hash:` line to its front matter first" unless text.match?(/^source_hash:.*$/)
 

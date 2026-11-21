@@ -6,14 +6,18 @@ layout: default
   The English page (_apps/<name>.md) holds the app's settings: name, icon, App Store link, support email, terms link.
   A translation (_apps/<lang>/<name>.md) supplies only its translated text; everything else comes from the English page.
   Interface text comes from _data/i18n.yml. The Markdown body is the privacy policy.
+  If the app has Terms of Use for Android (_terms/android/<name>.md), Helpful links lists them
+  beside Apple's terms for iPhone.
 {%- endcomment -%}
 {%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
 {%- assign app = site.apps | where: "slug", page.slug | where: "lang", site.lang | first | default: page -%}
 {%- assign versions = site.apps | where: "slug", page.slug -%}
-{%- assign languages = site.translations | unshift: site.lang -%}
 {%- assign support_email = app.support_email | default: site.email -%}
 {%- assign support_subject = t.support_subject | replace: "%app%", app.name | uri_escape -%}
 {%- assign terms_url = app.terms_url | default: site.app_terms_url -%}
+{%- assign android_terms = site.terms | where: "slug", page.slug | where: "platform", "android" -%}
+{%- assign android_terms_en = android_terms | where: "lang", site.lang | first -%}
+{%- assign android_terms_page = android_terms | where: "lang", page.lang | first | default: android_terms_en -%}
 {%- assign tagline = page.tagline | default: app.tagline -%}
 {%- assign toc_parts = content | split: '<h2 id="' -%}
 
@@ -25,19 +29,7 @@ layout: default
         <span aria-hidden="true">/</span>
         <span aria-current="page">{{ app.name }}</span>
       </nav>
-      {%- if versions.size > 1 %}
-      <nav class="lang-switch" aria-label="{{ t.language }}">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c-2 2-2 11 0 13M8 1.5c2 2 2 11 0 13"/></svg>
-        <ul>
-          {%- for code in languages %}
-          {%- assign version = versions | where: "lang", code | first %}
-          {%- if version %}
-          <li><a href="{{ version.url | relative_url }}" hreflang="{{ code }}" lang="{{ code }}"{% if code == page.lang %} aria-current="page"{% endif %}>{{ site.data.i18n[code].language_name }}</a></li>
-          {%- endif %}
-          {%- endfor %}
-        </ul>
-      </nav>
-      {%- endif %}
+      {%- include lang-switch.html versions=versions %}
     </div>
 
     <div class="app-hero__inner">
@@ -85,7 +77,12 @@ layout: default
     <h3>{{ t.helpful_links }}</h3>
     <ul class="link-list">
       <li><a href="#privacy">{{ t.privacy_link | replace: "%app%", app.name }}</a></li>
+      {%- if android_terms_page %}
+      <li><a href="{{ terms_url }}" rel="noopener">{{ t.terms_link_ios | replace: "%app%", app.name }}</a></li>
+      <li><a href="{{ android_terms_page.url | relative_url }}">{{ t.terms_link_android | replace: "%app%", app.name }}</a></li>
+      {%- else %}
       <li><a href="{{ terms_url }}" rel="noopener">{{ t.terms_link | replace: "%app%", app.name }}</a></li>
+      {%- endif %}
       <li><a href="{{ '/apps/' | relative_url }}">{{ t.all_apps | escape }}</a></li>
     </ul>
   </div>
