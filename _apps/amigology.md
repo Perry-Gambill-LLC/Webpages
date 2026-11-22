@@ -11,6 +11,7 @@ icon: /assets/img/apps/amigology.png
 
 # Optional extras (shown only when filled in)
 app_store_url: https://apps.apple.com/us/app/amigology/id6834551609
+play_store_url: https://play.google.com/store/apps/details?id=com.perrygambill.chronopop
 platforms:              # e.g. [iPhone, iPad]
 support_email:          # leave blank to use the site-wide email from _config.yml
 

@@ -30,7 +30,7 @@ assets/img/apps/         App icons
 
 1. Copy `_templates/app.md` to `_apps/<app-name>.md`, e.g. `_apps/my-app.md`.
    The file name becomes the URL: `/apps/my-app/en-us/`. Set `redirect_from` to `/apps/my-app/` (as in the template) so the short URL `/apps/my-app/` redirects there.
-2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `order`, `app_store_url`, `platforms`, `support_email` and `terms_url`.
+2. Fill in the front matter at the top: `name`, `tagline`, `privacy_effective_date`, and optionally `order`, `app_store_url`, `play_store_url`, `platforms`, `support_email` and `terms_url`.
    `terms_url` sets the app's Terms of Service link; leave it blank to use Apple's standard EULA (`app_terms_url` in `_config.yml`).
    Apple's EULA only covers the App Store. If the app is also on Google Play, give it its own terms there (see [Terms of Use for Android](#terms-of-use-for-android)).
    `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
@@ -66,7 +66,7 @@ Another platform would get its own folder, e.g. `_terms/<platform>/`, plus a `de
 Each app page (and each Terms of Use page, the same way, in `_terms/<platform>/<lang>/`) is published in US English, Mexican Spanish, Brazilian Portuguese and Vietnamese, at `/apps/<app>/en-us/`, `/apps/<app>/es-mx/`, `/apps/<app>/pt-br/` and `/apps/<app>/vi-vn/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
 
 - A translation lives at `_apps/es-mx/<app>.md`, `_apps/pt-br/<app>.md` or `_apps/vi-vn/<app>.md`, with the same file name as the English page.
-- Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date` (for terms: `description` and `effective_date`), plus `source_hash`. Everything else (name, icon, App Store link, support email, terms link) comes from the English page.
+- Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date` (for terms: `description` and `effective_date`), plus `source_hash`. Everything else (name, icon, App Store and Google Play links, support email, terms link) comes from the English page.
 - Each heading keeps the English heading's ID, written explicitly: `## Información que recopilamos {#information-we-collect}`.
 - Buttons, labels, header and footer text come from `_data/i18n.yml`.
 

@@ -3,7 +3,7 @@ layout: default
 ---
 {%- comment -%}
   Support + Privacy Policy page for a single app, in any language.
-  The English page (_apps/<name>.md) holds the app's settings: name, icon, App Store link, support email, terms link.
+  The English page (_apps/<name>.md) holds the app's settings: name, icon, App Store and Google Play links, support email, terms link.
   A translation (_apps/<lang>/<name>.md) supplies only its translated text; everything else comes from the English page.
   Interface text comes from _data/i18n.yml. The Markdown body is the privacy policy.
   If the app has Terms of Use for Android (_terms/android/<name>.md), Helpful links lists them
@@ -57,7 +57,13 @@ layout: default
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
       {%- endif %}
-      <a class="btn {% if app.app_store_url %}btn--ghost{% else %}btn--primary{% endif %}" href="#support">{{ t.get_support }}</a>
+      {%- if app.play_store_url %}
+      <a class="btn btn--primary" href="{{ app.play_store_url }}" rel="noopener">
+        {{ t.download_play }}
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      {%- endif %}
+      <a class="btn {% if app.app_store_url or app.play_store_url %}btn--ghost{% else %}btn--primary{% endif %}" href="#support">{{ t.get_support }}</a>
       <a class="btn btn--ghost" href="#privacy">{{ t.read_privacy }}</a>
     </div>
   </div>

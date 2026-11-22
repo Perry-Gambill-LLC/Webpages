@@ -31,6 +31,7 @@ en-US:
   app_icon_placeholder: "%app% app icon placeholder"
   support_and_privacy: Support & Privacy Policy
   download: Download on the App Store
+  download_play: Get it on Google Play
   get_support: Get support
   read_privacy: Read the privacy policy
   support: Support
@@ -77,6 +78,7 @@ es-MX:
   app_icon_placeholder: Ícono provisional de la app %app%
   support_and_privacy: Soporte y política de privacidad
   download: Descárgala en el App Store
+  download_play: Disponible en Google Play
   get_support: Obtener soporte
   read_privacy: Leer la política de privacidad
   support: Soporte
@@ -123,6 +125,7 @@ pt-BR:
   app_icon_placeholder: Ícone provisório do app %app%
   support_and_privacy: Suporte e Política de Privacidade
   download: Baixar na App Store
+  download_play: Disponível no Google Play
   get_support: Obter suporte
   read_privacy: Ler a política de privacidade
   support: Suporte
@@ -169,6 +172,7 @@ vi-VN:
   app_icon_placeholder: Biểu tượng tạm thời của ứng dụng %app%
   support_and_privacy: Hỗ trợ và Chính sách quyền riêng tư
   download: Tải về trên App Store
+  download_play: Tải về trên Google Play
   get_support: Nhận hỗ trợ
   read_privacy: Đọc chính sách quyền riêng tư
   support: Hỗ trợ

@@ -25,6 +25,7 @@ order:
 icon:
 
 app_store_url:          # e.g. https://apps.apple.com/app/id0000000000
+play_store_url:         # e.g. https://play.google.com/store/apps/details?id=com.example.app
 platforms:              # e.g. [iPhone, iPad, Mac]
 support_email:          # leave blank to use the site-wide email from _config.yml
 terms_url:              # leave blank to use Apple's standard EULA (app_terms_url in _config.yml)
