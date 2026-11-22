@@ -141,3 +141,49 @@ pt-BR:
   privacy_policy: Política de Privacidade
   effective_date: Data de vigência
   translation_notice: Esta é uma tradução da versão original em inglês. Em caso de divergência, prevalece a versão em inglês.
+
+vi-VN:
+  language_name: Tiếng Việt
+  # Header and footer
+  skip_link: Chuyển đến nội dung chính
+  home_label: Perry & Gambill LLC, trang chủ
+  toggle_nav: Mở hoặc đóng menu
+  primary_nav: Chính
+  nav_focus: Lĩnh vực trọng tâm
+  nav_mission: Sứ mệnh
+  nav_apps: Ứng dụng
+  nav_legal: Pháp lý
+  nav_contact: Liên hệ
+  contact_us: Liên hệ với chúng tôi
+  footer_tagline: Củng cố cộng đồng bằng nguồn vốn, chuyên môn và công nghệ đổi mới.
+  footer_company: Công ty
+  footer_legal: Pháp lý
+  footer_get_in_touch: Liên lạc
+  terms_and_conditions: Điều khoản và điều kiện
+  rights_reserved: Bảo lưu mọi quyền.
+  # App pages
+  page_title: Hỗ trợ và Chính sách quyền riêng tư của %app%
+  breadcrumb: Đường dẫn
+  language: Ngôn ngữ
+  app_icon: Biểu tượng ứng dụng %app%
+  app_icon_placeholder: Biểu tượng tạm thời của ứng dụng %app%
+  support_and_privacy: Hỗ trợ và Chính sách quyền riêng tư
+  download: Tải về trên App Store
+  get_support: Nhận hỗ trợ
+  read_privacy: Đọc chính sách quyền riêng tư
+  support: Hỗ trợ
+  need_help: Bạn cần trợ giúp với %app%?
+  support_text: Để được hỗ trợ về ứng dụng %app%, vui lòng liên hệ với chúng tôi tại
+  support_subject: Hỗ trợ %app%
+  email_support: Gửi email cho bộ phận hỗ trợ
+  helpful_links: Liên kết hữu ích
+  privacy_link: Chính sách quyền riêng tư của %app%
+  terms_link: Điều khoản dịch vụ của %app%
+  terms_link_ios: Điều khoản sử dụng %app% cho iPhone
+  terms_link_android: Điều khoản sử dụng %app% cho Android
+  terms_heading_android: Điều khoản sử dụng cho Android
+  all_apps: Tất cả ứng dụng của Perry & Gambill
+  contents: Mục lục
+  privacy_policy: Chính sách quyền riêng tư
+  effective_date: Ngày có hiệu lực
+  translation_notice: Đây là bản dịch từ bản gốc tiếng Anh. Nếu có khác biệt giữa hai bản, bản tiếng Anh sẽ được áp dụng.
