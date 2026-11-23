@@ -8,6 +8,7 @@
 #     Every [BRACKETED] item must be replaced or removed before publishing.
 #  4. Add translations at _apps/es-mx/<app-name>.md, _apps/pt-br/<app-name>.md and _apps/vi-vn/<app-name>.md
 #     (see "Translations" in README.md), then run: ruby scripts/translations.rb
+#     For fewer languages, list them in the app's front matter, e.g. translations: [es-MX]
 #  This folder (_templates) is never published.
 # ============================================================================
 

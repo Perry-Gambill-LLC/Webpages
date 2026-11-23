@@ -17,6 +17,14 @@ translations:
   - pt-BR   # Brazilian Portuguese
   - vi-VN   # Vietnamese
 
+# The rest of the site (home page, apps list, legal notices) is in English and in
+# these languages, each a copy of the English pages under /<lowercase code>/: the
+# Spanish home page is es-mx/index.html, at /es-mx/. Each must also be listed under
+# `translations` above, and have its folder as `site_root` in _data/i18n.yml.
+# App pages in other languages link to the English site.
+site_translations:
+  - es-MX   # Mexican Spanish
+
 # Build settings --------------------------------------------------------------
 markdown: kramdown
 kramdown:
@@ -63,6 +71,15 @@ defaults:
     values:
       lang: vi-VN
       permalink: /apps/:name/vi-vn/
+  - scope:
+      type: pages
+    values:
+      lang: en-US
+  - scope:
+      path: es-mx
+      type: pages
+    values:
+      lang: es-MX
   - scope:
       type: terms
     values:

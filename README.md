@@ -20,7 +20,9 @@ _templates/app.md        Starter file for a new app (never published)
 index.html               Home page
 legal.html               Terms and Conditions (served at /legal)
 apps/index.html          Apps listing (served at /apps/)
-404.html                 Not-found page
+es-mx/                   Spanish copies of the home page, apps listing and legal notices
+                           ->  /es-mx/, /es-mx/apps/, /es-mx/legal
+404.html                 Not-found page (English and Spanish, as one page serves every language)
 assets/css/styles.css    All styles (colors/fonts are variables at the top)
 assets/js/main.js        Mobile menu, footer year, scroll fade-in
 assets/img/apps/         App icons
@@ -35,7 +37,7 @@ assets/img/apps/         App icons
    Apple's EULA only covers the App Store. If the app is also on Google Play, give it its own terms there (see [Terms of Use for Android](#terms-of-use-for-android)).
    `order` sets the app's position on `/apps/` (lower numbers first; apps without one follow alphabetically).
 3. Replace the privacy policy text below the front matter. It's plain Markdown; each `## Heading` is added to the page's table of contents automatically.
-4. Add the Mexican Spanish and Brazilian Portuguese translations (see [Translations](#translations)).
+4. Add the translations (see [Translations](#translations)).
 5. Commit and push. The app appears on `/apps/` and is linked from the home page.
 
 Use the page URL, e.g. `/apps/my-app/en-us/`, for both the **Support URL** and the **Privacy Policy URL** in App Store Connect. To point straight at each section, add `#support` or `#privacy`. The short URL `/apps/my-app/` also works and keeps the `#support`/`#privacy` part when it redirects, so App Store links set up before the `/en-us/` change still work.
@@ -65,6 +67,8 @@ Another platform would get its own folder, e.g. `_terms/<platform>/`, plus a `de
 
 Each app page (and each Terms of Use page, the same way, in `_terms/<platform>/<lang>/`) is published in US English, Mexican Spanish, Brazilian Portuguese and Vietnamese, at `/apps/<app>/en-us/`, `/apps/<app>/es-mx/`, `/apps/<app>/pt-br/` and `/apps/<app>/vi-vn/`. Each page has a language switcher. The languages are listed under `translations` in `_config.yml`.
 
+An app can be published in only some of those languages: list them under `translations` in its English page's front matter, e.g. `translations: [es-MX]` (as Amigology does, being in English and Spanish only). Its Terms of Use pages follow the same list, and the check fails if a translation exists in a language the app doesn't list.
+
 - A translation lives at `_apps/es-mx/<app>.md`, `_apps/pt-br/<app>.md` or `_apps/vi-vn/<app>.md`, with the same file name as the English page.
 - Its front matter holds only the translated `tagline`, `description` and `privacy_effective_date` (for terms: `description` and `effective_date`), plus `source_hash`. Everything else (name, icon, App Store and Google Play links, support email, terms link) comes from the English page.
 - Each heading keeps the English heading's ID, written explicitly: `## Información que recopilamos {#information-we-collect}`.
@@ -86,6 +90,18 @@ ruby scripts/translations.rb stamp _terms/android/es-mx/<app>.md _terms/android/
 The same check runs on GitHub (Actions → Translations) on every push to `main`. A failed check doesn't stop the site from publishing; it just flags that the translations are behind.
 
 In App Store Connect, set each localization's Privacy Policy URL and Support URL to its page: English (U.S.) → `/apps/<app>/en-us/`, Spanish (Mexico) → `/apps/<app>/es-mx/`, Portuguese (Brazil) → `/apps/<app>/pt-br/`, Vietnamese → `/apps/<app>/vi-vn/`.
+
+### The rest of the site
+
+The home page, the apps listing and the legal notices are in English and Mexican Spanish. The languages are listed under `site_translations` in `_config.yml`; each must also be under `translations`.
+
+- Each English page has a `ref` in its front matter (`home`, `apps`, `legal`). Its Spanish copy has the same path under `es-mx/` (`es-mx/legal.html`) and the same `ref`, which is how the two find each other for the language switcher and the `hreflang` links. Spanish pages get `lang: es-MX` from `_config.yml`.
+- A copy is the whole page with its text translated: keep the markup, links and element ids the same as the English page's (links like `/legal#liability` work in both languages). Links to other pages of the site point at their Spanish copies (`/es-mx/apps/`).
+- Its translated front matter is `title`, `description` and, on the home page, `tagline`.
+- The header, footer and breadcrumbs link to the reader's language's copy of the site, from `site_root` in `_data/i18n.yml` (`/es-mx/` for Spanish). App pages in a language the rest of the site isn't in (pt-BR, vi-VN) link to the English site.
+- The same check covers them: `ruby scripts/translations.rb stamp es-mx/<page>` once a copy is up to date.
+
+To add a page, give the English page a new `ref`, add its Spanish copy under `es-mx/` and stamp it. To add a language to the rest of the site, add it to `site_translations`, set its `site_root` to its folder, and copy and translate each page into that folder.
 
 ## Changing the contact email
 

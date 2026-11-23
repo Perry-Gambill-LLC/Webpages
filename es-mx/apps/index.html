@@ -1,0 +1,68 @@
+---
+# Mexican Spanish translation of apps/index.html: a full copy of the English page with
+# its text translated. Keep the markup, links and ids the same as the English page's.
+# source_hash records which version of the English page this translates;
+# see "Translations" in README.md before changing it.
+layout: default
+title: Nuestras apps
+description: Apps y software de Perry & Gambill LLC, con información de soporte y privacidad de cada una.
+nav: apps
+ref: apps
+source_hash: b90de7e8708c
+---
+{%- comment -%} Apps with an `order` value come first (lowest first); the rest follow alphabetically. {%- endcomment -%}
+{%- comment -%} One tile per app, linking to its page in this page's language if it has one, else in English. {%- endcomment -%}
+{%- assign english_apps = site.apps | where: "lang", site.lang -%}
+{%- assign ordered_apps = english_apps | where_exp: "app", "app.order" | sort: "order" -%}
+{%- assign unordered_apps = english_apps | where_exp: "app", "app.order == nil" | sort: "name" -%}
+{%- assign apps = ordered_apps | concat: unordered_apps -%}
+<section class="page-hero">
+  <div class="wrap">
+    <div class="hero__bar">
+      <span class="eyebrow">Apps y software</span>
+      {%- include lang-switch.html %}
+    </div>
+    <h1>Nuestras apps</h1>
+    <div class="page-hero__meta">
+      <span>Soluciones digitales para consumidores y empresas en diversas plataformas.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="wrap">
+    {%- if apps.size > 0 %}
+    <div class="app-tiles">
+      {%- for app in apps %}
+      {%- assign app_page = site.apps | where: "slug", app.slug | where: "lang", page.lang | first | default: app %}
+      <article class="app-tile reveal">
+        {% include app-icon.html app=app size="md" %}
+        <div class="app-tile__body">
+          <h2><a class="app-tile__main" href="{{ app_page.url | relative_url }}">{{ app.name }}</a></h2>
+          {%- assign tagline = app_page.tagline | default: app.tagline %}
+          {%- if tagline %}
+          <p>{{ tagline }}</p>
+          {%- endif %}
+          <div class="app-tile__links">
+            <span class="app-tile__link">
+              Soporte y privacidad
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </span>
+            {%- if app.app_store_url %}
+            <a class="app-tile__link app-tile__store" href="{{ app.app_store_url }}" rel="noopener">
+              App Store
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            {%- endif %}
+          </div>
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="empty-note">Pronto encontrarás nuestras apps aquí.</p>
+    {%- endif %}
+
+    <p class="apps-contact">¿Tienes preguntas sobre alguna de nuestras apps? Escríbenos a <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+  </div>
+</section>

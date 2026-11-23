@@ -1,0 +1,156 @@
+---
+# Mexican Spanish translation of index.html: a full copy of the English page with
+# its text translated. Keep the markup, links and ids the same as the English page's.
+# source_hash records which version of the English page this translates;
+# see "Translations" in README.md before changing it.
+layout: default
+tagline: Bienes raíces, capital de riesgo y software
+description: Perry & Gambill LLC fortalece comunidades invirtiendo capital, experiencia y tecnología innovadora en propiedades en renta, capital de riesgo, y apps y software.
+schema: true
+ref: home
+source_hash: 339c72ab6789
+---
+  <!-- Hero -->
+  <section class="hero">
+    <svg class="hero__pattern" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 700">
+      <defs>
+        <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+          <path d="M56 0H0V56" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+        <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0.25" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+        </linearGradient>
+        <mask id="m"><rect width="1200" height="700" fill="url(#fade)"/></mask>
+      </defs>
+      <rect width="1200" height="700" fill="url(#grid)" mask="url(#m)"/>
+    </svg>
+    <div class="hero__glow" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="hero__bar">
+        <span class="eyebrow">Bienes raíces &middot; Capital de riesgo &middot; Software</span>
+        {%- include lang-switch.html %}
+      </div>
+      <h1>Capital, experiencia y tecnología <em>al servicio</em> de nuestras comunidades.</h1>
+      <p class="hero__lede">Perry &amp; Gambill LLC invierte en pequeñas empresas prometedoras, desarrolla software transformador y adquiere bienes raíces residenciales con un solo objetivo: generar un impacto positivo y duradero donde vivimos y trabajamos.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#focus">
+          Conoce lo que hacemos
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#contact">Escríbenos</a>
+      </div>
+
+      <ul class="hero__pillars">
+        <li><span>i.</span>Ampliar las opciones de vivienda</li>
+        <li><span>ii.</span>Fomentar el emprendimiento</li>
+        <li><span>iii.</span>Impulsar la innovación digital</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Focus areas -->
+  <section class="section" id="focus" aria-labelledby="focus-title">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <div>
+          <span class="eyebrow">Lo que hacemos</span>
+          <h2 id="focus-title">Tres disciplinas, un mismo propósito.</h2>
+        </div>
+        <p>Cada área de nuestro trabajo busca generar oportunidades económicas y mejorar la calidad de vida en las comunidades a las que servimos.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__top">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 10.5 12 4l9 6.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/>
+              </svg>
+            </div>
+            <span class="card__num">01</span>
+          </div>
+          <h3>Propiedades en renta</h3>
+          <p>Adquisición de propiedades residenciales para ofrecer opciones de vivienda en mercados de rápido crecimiento.</p>
+          <div class="card__tag">Ampliar las opciones de vivienda</div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__top">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 20h18"/><path d="M6 16v4M11 12v8M16 14v6"/><path d="M4 11l5-5 4 3 7-6"/><path d="M15 3h5v5"/>
+              </svg>
+            </div>
+            <span class="card__num">02</span>
+          </div>
+          <h3>Capital de riesgo</h3>
+          <p>Inversiones para impulsar a pequeñas empresas que demuestran potencial y claridad.</p>
+          <div class="card__tag">Fomentar el emprendimiento</div>
+        </article>
+
+        <article class="card reveal">
+          <div class="card__top">
+            <div class="card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/><path d="m9.5 8.5-2 2 2 2M14.5 8.5l2 2-2 2"/>
+              </svg>
+            </div>
+            <span class="card__num">03</span>
+          </div>
+          <h3>Apps y software</h3>
+          <p>Soluciones digitales para consumidores y empresas en diversas plataformas.</p>
+          {% if site.apps.size > 0 %}<a class="card__link" href="{{ '/es-mx/apps/' | relative_url }}">Ver nuestras apps <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>{% endif %}
+          <div class="card__tag">Impulsar la innovación digital</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="section mission" id="mission" aria-labelledby="mission-title">
+    <div class="wrap mission__grid">
+      <div class="reveal">
+        <span class="eyebrow" id="mission-title">Nuestra misión</span>
+        <p class="mission__quote">Construir un <em>mejor futuro</em> para los demás.</p>
+      </div>
+      <div class="mission__body reveal">
+        <p>Nos dedicamos a fortalecer nuestras comunidades invirtiendo estratégicamente capital, experiencia y tecnología innovadora. Nuestra misión es construir un mejor futuro para los demás mediante inversiones específicas en pequeñas empresas prometedoras, la creación de software transformador y la adquisición estratégica de bienes raíces. Al fomentar el emprendimiento, impulsar la innovación digital y ampliar las opciones de vivienda, buscamos generar un impacto positivo y duradero, crear oportunidades económicas y mejorar la calidad de vida en las comunidades a las que servimos.</p>
+
+        <dl class="outcomes">
+          <div>
+            <dt>Capital</dt>
+            <dd>Inversiones específicas en pequeñas empresas prometedoras.</dd>
+          </div>
+          <div>
+            <dt>Tecnología</dt>
+            <dd>La creación de software transformador.</dd>
+          </div>
+          <div>
+            <dt>Bienes raíces</dt>
+            <dd>La adquisición estratégica de propiedades residenciales.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="eyebrow">Contacto</span>
+        <h2 id="contact-title">¿Tienes preguntas?</h2>
+        <p>Ya seas dueño de un negocio, un posible residente o un posible socio, nos dará gusto saber de ti.</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card__label">Escríbenos a</div>
+        <a class="contact-card__email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+        <a class="btn btn--primary" href="mailto:{{ site.email }}">
+          Enviar un mensaje
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>

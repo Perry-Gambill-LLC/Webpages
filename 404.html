@@ -5,6 +5,10 @@ permalink: /404.html
 noindex: true
 sitemap: false
 ---
+{%- comment -%}
+  GitHub Pages serves this one page for every missing URL, in any language, so it's in
+  English and Spanish (the site's languages: site_translations in _config.yml).
+{%- endcomment -%}
 <section class="page-hero page-hero--center">
   <div class="wrap">
     <span class="eyebrow">404</span>
@@ -12,9 +16,13 @@ sitemap: false
     <div class="page-hero__meta">
       <span>The page you're looking for doesn't exist or has moved.</span>
     </div>
+    <div class="page-hero__meta" lang="es-MX">
+      <span>Página no encontrada. La página que buscas no existe o cambió de dirección.</span>
+    </div>
     <div class="hero__actions">
       <a class="btn btn--primary" href="{{ '/' | relative_url }}">Return home</a>
       <a class="btn btn--ghost" href="{{ '/apps/' | relative_url }}">Browse our apps</a>
+      <a class="btn btn--ghost" href="{{ '/es-mx/' | relative_url }}" lang="es-MX" hreflang="es-MX">Ir al inicio en español</a>
     </div>
   </div>
 </section>

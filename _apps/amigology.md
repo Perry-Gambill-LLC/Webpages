@@ -17,6 +17,10 @@ support_email:          # leave blank to use the site-wide email from _config.ym
 
 privacy_effective_date: November 21, 2026
 
+# Languages this app is translated into, if not all of those under `translations` in _config.yml
+# (its Terms of Use pages follow the same list)
+translations: [es-MX]
+
 # Keep old links working: the app's short URL, Google Sites, and the pre-rename Chronopop URL
 redirect_from:
   - /apps/amigology/

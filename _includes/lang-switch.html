@@ -1,16 +1,19 @@
 {%- comment -%}
   Links to the other languages a page is published in, shown when there's more than one.
   Usage: {% include lang-switch.html versions=versions %}, where versions are the page's copies in
-  each language (e.g. site.apps | where: "slug", page.slug).
+  each language (e.g. site.apps | where: "slug", page.slug). Without versions, the site's own pages
+  (home, apps list, legal) find theirs by the `ref` they share in their front matter.
 {%- endcomment -%}
 {%- assign t = site.data.i18n[page.lang] | default: site.data.i18n[site.lang] -%}
+{%- assign versions = include.versions -%}
+{%- if versions == nil and page.ref %}{% assign versions = site.html_pages | where: "ref", page.ref %}{% endif -%}
 {%- assign languages = site.translations | unshift: site.lang -%}
-{%- if include.versions.size > 1 %}
+{%- if versions.size > 1 %}
       <nav class="lang-switch" aria-label="{{ t.language }}">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c-2 2-2 11 0 13M8 1.5c2 2 2 11 0 13"/></svg>
         <ul>
           {%- for code in languages %}
-          {%- assign version = include.versions | where: "lang", code | first %}
+          {%- assign version = versions | where: "lang", code | first %}
           {%- if version %}
           <li><a href="{{ version.url | relative_url }}" hreflang="{{ code }}" lang="{{ code }}"{% if code == page.lang %} aria-current="page"{% endif %}>{{ site.data.i18n[code].language_name }}</a></li>
           {%- endif %}

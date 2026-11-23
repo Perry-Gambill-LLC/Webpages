@@ -2,7 +2,7 @@
 # Amigology's Terms of Use on Android, published at /apps/amigology/en-us/terms/android/.
 # On iPhone, Apple's standard EULA applies instead (app_terms_url in _config.yml).
 # The app's name and icon come from its app page, _apps/amigology.md.
-# Translations: _terms/android/es-mx/amigology.md, _terms/android/pt-br/amigology.md and _terms/android/vi-vn/amigology.md.
+# Translation: _terms/android/es-mx/amigology.md.
 description: Terms of Use for the Amigology app on Android, by Perry & Gambill LLC.
 effective_date: November 21, 2026
 

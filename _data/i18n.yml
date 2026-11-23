@@ -1,11 +1,16 @@
 # Interface text for app pages and the header/footer they share, by language.
 # %app% is replaced with the app's name.
 #
+# site_root is where the header, footer and breadcrumb links go in that language: its
+# own copy of the site if it's under site_translations in _config.yml (/es-mx/),
+# otherwise the English site (/).
+#
 # When you add or change an English string, add or change it in every language.
 # Languages other than English must match the list in _config.yml (translations).
 
 en-US:
   language_name: English
+  site_root: /
   # Header and footer
   skip_link: Skip to main content
   home_label: Perry & Gambill LLC, home
@@ -53,6 +58,7 @@ en-US:
 
 es-MX:
   language_name: Español
+  site_root: /es-mx/
   # Header and footer
   skip_link: Saltar al contenido principal
   home_label: Perry & Gambill LLC, inicio
@@ -100,6 +106,7 @@ es-MX:
 
 pt-BR:
   language_name: Português
+  site_root: /
   # Header and footer
   skip_link: Pular para o conteúdo principal
   home_label: Perry & Gambill LLC, página inicial
@@ -147,6 +154,7 @@ pt-BR:
 
 vi-VN:
   language_name: Tiếng Việt
+  site_root: /
   # Header and footer
   skip_link: Chuyển đến nội dung chính
   home_label: Perry & Gambill LLC, trang chủ

@@ -953,8 +953,9 @@ p { margin: 0; }
   color: transparent;
 }
 
-/* App page language switcher ---------------------------------------------- */
-.app-hero__bar {
+/* Language switcher, top of each page's hero ------------------------------- */
+.app-hero__bar,
+.hero__bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;

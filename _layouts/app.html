@@ -25,7 +25,7 @@ layout: default
   <div class="wrap">
     <div class="app-hero__bar">
       <nav class="crumbs" aria-label="{{ t.breadcrumb }}">
-        <a href="{{ '/apps/' | relative_url }}">{{ t.nav_apps }}</a>
+        <a href="{{ t.site_root | append: 'apps/' | relative_url }}">{{ t.nav_apps }}</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">{{ app.name }}</span>
       </nav>
@@ -89,7 +89,7 @@ layout: default
       {%- else %}
       <li><a href="{{ terms_url }}" rel="noopener">{{ t.terms_link | replace: "%app%", app.name }}</a></li>
       {%- endif %}
-      <li><a href="{{ '/apps/' | relative_url }}">{{ t.all_apps | escape }}</a></li>
+      <li><a href="{{ t.site_root | append: 'apps/' | relative_url }}">{{ t.all_apps | escape }}</a></li>
     </ul>
   </div>
 </section>

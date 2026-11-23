@@ -20,7 +20,7 @@ layout: default
   <div class="wrap">
     <div class="app-hero__bar">
       <nav class="crumbs" aria-label="{{ t.breadcrumb }}">
-        <a href="{{ '/apps/' | relative_url }}">{{ t.nav_apps }}</a>
+        <a href="{{ t.site_root | append: 'apps/' | relative_url }}">{{ t.nav_apps }}</a>
         <span aria-hidden="true">/</span>
         <a href="{{ app_page.url | relative_url }}">{{ app.name }}</a>
         <span aria-hidden="true">/</span>

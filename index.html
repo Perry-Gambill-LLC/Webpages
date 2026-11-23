@@ -2,6 +2,8 @@
 layout: default
 description: Perry & Gambill LLC strengthens communities by deploying capital, expertise, and innovative technology through rental properties, venture capital, and apps & software.
 schema: true
+# The same page in other languages (es-mx/...) has the same ref.
+ref: home
 redirect_from:
   - /home/
 ---
@@ -23,7 +25,10 @@ redirect_from:
     <div class="hero__glow" aria-hidden="true"></div>
 
     <div class="wrap">
-      <span class="eyebrow">Real Estate &middot; Venture Capital &middot; Software</span>
+      <div class="hero__bar">
+        <span class="eyebrow">Real Estate &middot; Venture Capital &middot; Software</span>
+        {%- include lang-switch.html %}
+      </div>
       <h1>Capital, expertise, and technology, <em>put to work</em> for our communities.</h1>
       <p class="hero__lede">Perry &amp; Gambill LLC invests in promising small businesses, builds transformative software, and acquires residential real estate, with one aim: to create a positive and lasting impact where we live and work.</p>
       <div class="hero__actions">
